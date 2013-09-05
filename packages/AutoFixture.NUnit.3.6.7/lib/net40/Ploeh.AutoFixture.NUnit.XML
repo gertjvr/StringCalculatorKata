@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ploeh.AutoFixture.NUnit</name>
+    </assembly>
+    <members>
+        <member name="T:Ploeh.AutoFixture.NUnit.Addins.Addin">
+            <summary>
+            The Addin class holds information about an addin.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Addin.Install(NUnit.Core.Extensibility.IExtensionHost)">
+            <summary>
+            When called, the add-in installs itself into
+            the host, if possible. Because NUnit uses separate
+            hosts for the client and test domain environments,
+            an add-in may be invited to istall itself more than
+            once. The add-in is responsible for checking which
+            extension points are supported by the host that is
+            passed to it and taking the appropriate action.
+            </summary>
+            <param name="host">The host in which to install the add-in</param>
+            <returns>True if the add-in was installed, otehrwise false</returns>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.Addins.Builders.AutoTestCaseProvider">
+            <summary>
+            AutoTestCaseProvider provides data for methods
+            annotated with the AutoTestCaseAttribute.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Builders.AutoTestCaseProvider.HasTestCasesFor(System.Reflection.MethodInfo)">
+            <summary>
+            Determine whether any test cases are available for a parameterized method.
+            </summary>
+            <param name="method">A MethodInfo representing a parameterized test</param>
+            <returns>True if any cases are available, otherwise false.</returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Builders.AutoTestCaseProvider.GetTestCasesFor(System.Reflection.MethodInfo)">
+            <summary>
+            Return an IEnumerable providing test cases for use in
+            running a parameterized test.
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Builders.AutoTestCaseProvider.HasTestCasesFor(System.Reflection.MethodInfo,NUnit.Core.Test)">
+            <summary>
+            Determine whether any test cases are available for a parameterized method.
+            </summary>
+            <param name="method">A MethodInfo representing a parameterized test</param>
+            <param name="suite">A Suite representing a NUnit TestSuite</param>
+            <returns>True if any cases are available, otherwise false.</returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Builders.AutoTestCaseProvider.GetTestCasesFor(System.Reflection.MethodInfo,NUnit.Core.Test)">
+            <summary>
+            Return an IEnumerable providing test cases for use in
+            running a parameterized test.
+            </summary>
+            <param name="method"></param>
+            <param name="parentSuite"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.Addins.Reharper.TestDecorator">
+            <summary>
+            TestDecorator is used to add functionality to
+            another Test, which it aggregates.
+            </summary>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper">
+            <summary>
+            The EventListenerWrapper is used wrap any existing eventlistner and relay the events.
+            </summary>
+            <remarks>
+            This is needed because of a resharper bug where it doesn't pick up NUnitAddin's
+            http://youtrack.jetbrains.com/issue/RSRP-205480
+            </remarks>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.#ctor(NUnit.Core.EventListener)">
+            <summary>
+            
+            </summary>
+            <param name="eventListener"></param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.RunStarted(System.String,System.Int32)">
+            <summary>
+            Called when a test run is starting
+            </summary>
+            <param name="name">The name of the test being started</param>
+            <param name="testCount">The number of test cases under this test</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.RunFinished(NUnit.Core.TestResult)">
+            <summary>
+            Called when a run finishes normally
+            </summary>
+            <param name="result">The result of the test</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.RunFinished(System.Exception)">
+            <summary>
+            Called when a run is terminated due to an exception
+            </summary>
+            <param name="exception">Exception that was thrown</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.TestStarted(NUnit.Core.TestName)">
+            <summary>
+            Called when a test case is starting
+            </summary>
+            <param name="testName">The name of the test case</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.TestFinished(NUnit.Core.TestResult)">
+            <summary>
+            Called when a test case has finished
+            </summary>
+            <param name="result">The result of the test</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.SuiteStarted(NUnit.Core.TestName)">
+            <summary>
+            Called when a suite is starting
+            </summary>
+            <param name="testName">The name of the suite</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.SuiteFinished(NUnit.Core.TestResult)">
+            <summary>
+            Called when a suite has finished
+            </summary>
+            <param name="result">The result of the suite</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.UnhandledException(System.Exception)">
+            <summary>
+            Called when an unhandled exception is detected during
+            the execution of a test run.
+            </summary>
+            <param name="exception">The exception thta was detected</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.Addins.Reharper.EventListenerWrapper.TestOutput(NUnit.Core.TestOutput)">
+            <summary>
+            Called when the test direts output to the console.
+            </summary>
+            <param name="testOutput">A console message</param>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.Addins.Reharper.TestMethodWrapper">
+            <summary>
+            This class wires the EventListenerWrapper around the existing EventListner
+            </summary>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute">
+            <summary>
+            Provides auto-generated data specimens generated by AutoFixture as an extention to
+            NUnit TestCase attribute.
+            </summary>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.TestCaseDataAttribute">
+            <summary>
+            Abstract attribute which represents a testcase provider for a testcase.
+                        TestCase providers derive from this attribute and implement GetArguments
+                        to return the arguments for the testcase.
+            
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.TestCaseDataAttribute.GetArguments(System.Reflection.MethodInfo)">
+            <summary>
+            Returns the composition of arguments to be used to test the testcase. Favors the arguments returned
+            by TestCaseDataAttributes in ascending order.
+            </summary>
+            <param name="method">The method that is being tested.</param>
+            <returns>
+            Returns the composition of the testcase arguments.
+            </returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor overload initializes the <see cref="P:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.Fixture"/> to an instance of
+            <see cref="P:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.Fixture"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/> class with an
+            <see cref="T:Ploeh.AutoFixture.IFixture"/> of the supplied type.
+            </summary>
+            <param name="fixtureType">The type of the composer.</param>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="fixtureType"/> does not implement <see cref="T:Ploeh.AutoFixture.IFixture"/>
+            or does not have a default constructor.
+            </exception>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.#ctor(Ploeh.AutoFixture.IFixture)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/> class with the
+            supplied <see cref="T:Ploeh.AutoFixture.IFixture"/>.
+            </summary>
+            <param name="fixture">The fixture.</param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.GetArguments(System.Reflection.MethodInfo)">
+            <summary>
+            Returns the data to be used to test the testcase.
+            </summary>
+            <param name="method">The method that is being tested</param>
+            <returns>The testcase data generated by <see cref="P:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.Fixture"/>.</returns>
+        </member>
+        <member name="P:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.Fixture">
+            <summary>
+            Gets the fixture used by <see cref="M:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.GetArguments(System.Reflection.MethodInfo)"/> to create specimens.
+            </summary>
+        </member>
+        <member name="P:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.FixtureType">
+            <summary>
+            Gets the type of <see cref="P:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute.Fixture"/>.
+            </summary>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.ModestAttribute">
+            <summary>
+            An attribute that can be applied to parameters in an <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>-driven
+            TestCase to indicate that the parameter value should be created using the most modest
+            constructor that can be satisfied by an <see cref="T:Ploeh.AutoFixture.IFixture"/>.
+            </summary>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.CustomizeAttribute">
+            <summary>
+            Base class for customizing parameters in methods decorated with
+            <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.CustomizeAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization for a parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.ModestAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.ModestConstructorQuery"/> with the
+            <see cref="T:System.Type"/> of the parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns>
+            A customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.ModestConstructorQuery"/> with the
+            <see cref="T:System.Type"/> of the parameter.
+            </returns>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.NoAutoPropertiesAttribute">
+            <summary>
+            An attribute that can be applied to parameters in an <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>-driven
+            TestCase to indicate that the parameter value should not have properties auto populated
+            when the <see cref="T:Ploeh.AutoFixture.IFixture"/> creates an instance of that type.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.NoAutoPropertiesAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization that stops auto population of properties for the type of the parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns>
+            A customization that stops auto population of the <see cref="T:System.Type"/> of the parameter.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="parameter"/> is null.
+            </exception>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.GreedyAttribute">
+            <summary>
+            An attribute that can be applied to parameters in an <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>-driven
+            TestCase to indicate that the parameter value should be created using the most greedy
+            constructor that can be satisfied by an <see cref="T:Ploeh.AutoFixture.IFixture"/>.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.GreedyAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.GreedyConstructorQuery"/> with the
+            <see cref="T:System.Type"/> of the parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns>
+            A customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.GreedyConstructorQuery"/> with the
+            <see cref="T:System.Type"/> of the parameter.
+            </returns>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.FavorListsAttribute">
+            <summary>
+            An attribute that can be applied to parameters in an <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>-driven
+            TestCase to indicate that the parameter value should be created using a constructor with one
+            or more <see cref="T:System.Collections.Generic.IList`1"/> arguments, if applicable.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.FavorListsAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.ListFavoringConstructorQuery"/> with
+            the <see cref="T:System.Type"/> of the parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns>
+            A customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.ListFavoringConstructorQuery"/> with the
+            <see cref="T:System.Type"/> of the parameter.
+            </returns>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.FrozenAttribute">
+            <summary>
+            An attribute that can be applied to parameters in an <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>-driven
+            TestCase to indicate that the parameter value should be frozen so that the same instance is
+            returned every time the <see cref="T:Ploeh.AutoFixture.IFixture"/> creates an instance of that type.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.FrozenAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization that freezes the <see cref="T:System.Type"/> of the parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns>
+            A customization that freezes the <see cref="T:System.Type"/> of the parameter.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="parameter"/> is null.
+            </exception>
+        </member>
+        <member name="P:Ploeh.AutoFixture.NUnit.FrozenAttribute.As">
+            <summary>
+            Gets or sets the <see cref="T:System.Type"/> that the frozen parameter value
+            should be mapped to in the <see cref="T:Ploeh.AutoFixture.IFixture"/>.
+            </summary>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.FavorEnumerablesAttribute">
+            <summary>
+            An attribute that can be applied to parameters in an <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>-driven
+            TestCase to indicate that the parameter value should be created using a constructor with one
+            or more <see cref="T:System.Collections.Generic.IEnumerable`1"/> arguments, if applicable.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.FavorEnumerablesAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.EnumerableFavoringConstructorQuery"/>
+            with the <see cref="T:System.Type"/> of the parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns>
+            A customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.EnumerableFavoringConstructorQuery"/> with
+            the <see cref="T:System.Type"/> of the parameter.
+            </returns>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.FavorArraysAttribute">
+            <summary>
+            An attribute that can be applied to parameters in an <see cref="T:Ploeh.AutoFixture.NUnit.AutoTestCaseAttribute"/>-driven
+            TestCase to indicate that the parameter value should be created using a constructor with one
+            or more array arguments, if applicable.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.FavorArraysAttribute.GetCustomization(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets a customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.ArrayFavoringConstructorQuery"/> with
+            the <see cref="T:System.Type"/> of the parameter.
+            </summary>
+            <param name="parameter">The parameter for which the customization is requested.</param>
+            <returns>
+            A customization that associates a <see cref="T:Ploeh.AutoFixture.Kernel.ArrayFavoringConstructorQuery"/> with the
+            <see cref="T:System.Type"/> of the parameter.
+            </returns>
+        </member>
+        <member name="T:Ploeh.AutoFixture.NUnit.CompositeTestCaseDataAttribute">
+            <summary>
+            An implementation of TestCaseDataAttribute that composes other TestCaseDataAttribute instances.
+            </summary>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.CompositeTestCaseDataAttribute.#ctor(System.Collections.Generic.IEnumerable{Ploeh.AutoFixture.NUnit.TestCaseDataAttribute})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.NUnit.CompositeTestCaseDataAttribute"/> class.
+            </summary>
+            <param name="attributes">The attributes representing a data source for a testcase.
+            </param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.CompositeTestCaseDataAttribute.#ctor(Ploeh.AutoFixture.NUnit.TestCaseDataAttribute[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ploeh.AutoFixture.NUnit.CompositeTestCaseDataAttribute"/> class.
+            </summary>
+            <param name="attributes">The attributes representing a data source for a testcase.
+            </param>
+        </member>
+        <member name="M:Ploeh.AutoFixture.NUnit.CompositeTestCaseDataAttribute.GetArguments(System.Reflection.MethodInfo)">
+            <summary>
+            Returns the composition of arguments to be used to test the testcase. Favors the arguments returned
+            by TestCaseDataAttributes in ascending order. 
+            </summary>
+            <param name="method">The method that is being tested.</param>
+            <returns>
+            Returns the composition of the testcase arguments.
+            </returns>
+        </member>
+        <member name="P:Ploeh.AutoFixture.NUnit.CompositeTestCaseDataAttribute.Attributes">
+            <summary>
+            Gets the attributes supplied through one of the constructors.
+            </summary>
+        </member>
+    </members>
+</doc>
