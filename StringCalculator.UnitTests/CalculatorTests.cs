@@ -106,5 +106,20 @@ namespace StringCalculator.UnitTests
             Assert.IsTrue(e.Message.Contains((-x).ToString()));
             Assert.IsTrue(e.Message.Contains((-z).ToString()));
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddIgnoresBigNumbers(
+            Calculator sut,
+            int smallSeed,
+            int bigSeed)
+        {
+            var x = Math.Min(smallSeed, 1000);
+            var y = bigSeed + 1000;
+            var numbers = string.Join(",", x, y);
+
+            var actual = sut.Add(numbers);
+
+            Assert.AreEqual(x, actual);
+        }
     }
 }
