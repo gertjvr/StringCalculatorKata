@@ -37,5 +37,20 @@ namespace StringCalculator.UnitTests
             var actual = sut.Add(numbers);
             Assert.AreEqual(x + y, actual);
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddAnyAmountOfNumbersReturnsCorrectResult(
+            Calculator sut,
+            int count,
+            Generator<int> generator)
+        {
+            var intergers = generator.Take(count + 2).ToArray();
+            var numbers = string.Join(",", intergers);
+
+            var actual = sut.Add(numbers);
+
+            var expected = intergers.Sum();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
