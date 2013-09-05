@@ -1,0 +1,4 @@
+StringCalculatorKata
+====================
+
+StringCalculatorKata with AutoFixture
