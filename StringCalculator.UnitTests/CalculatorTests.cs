@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
@@ -138,6 +138,29 @@ namespace StringCalculator.UnitTests
             var actual = sut.Add(numbers);
 
             var expected = integers.Sum();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test, CalculatorTestConventions]
+        public void AddLineWithMultipleCustomDelimiterStringsReturnsCorrectResult(
+            Calculator sut,
+            string delimiter1,
+            string delimiter2,
+            int x,
+            int y,
+            int z)
+        {
+            var numbers = string.Format(
+                "//[{0}][{1}]\n{2}{0}{3}{1}{4}",
+                delimiter1,
+                delimiter2,
+                x,
+                y,
+                z);
+
+            var actual = sut.Add(numbers);
+
+            var expected = x + y + z;
             Assert.AreEqual(expected, actual);
         }
     }

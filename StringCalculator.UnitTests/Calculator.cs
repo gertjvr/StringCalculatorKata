@@ -14,7 +14,7 @@ namespace StringCalculator.UnitTests
             if (numbers.StartsWith("//"))
             {
                 if (numbers.StartsWith("//["))
-                    delimiters = new[] { numbers.Substring(3, numbers.IndexOf(']') - 3) };
+                    delimiters = GetDelimiters(numbers);
                 else
                     delimiters = new[] { numbers.Skip(2).First().ToString() };
 
@@ -35,6 +35,21 @@ namespace StringCalculator.UnitTests
                         string.Join(",", negatives)));
 
             return integers.Where(i => i <= 1000).Sum();
+        }
+
+        private static string[] GetDelimiters(string numbers)
+        {
+            var envelop = numbers.Substring(2, numbers.IndexOf("]\n") - 1);
+            var s = envelop;
+            var delimiters = new List<string>();
+            while (s != string.Empty)
+            {
+                var closingBracketPosition = s.IndexOf("]");
+                delimiters.Add(s.Substring(1, closingBracketPosition - 1));
+                s = s.Substring(closingBracketPosition + 1);
+            }
+
+            return delimiters.ToArray();
         }
     }
 }
