@@ -121,5 +121,24 @@ namespace StringCalculator.UnitTests
 
             Assert.AreEqual(x, actual);
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddLineWithCustomDelimiterStringReturnsCorrectResult(
+            Calculator sut,
+            string delimiter,
+            int count,
+            Generator<int> intGenerator)
+        {
+            var integers = intGenerator.Take(count).ToArray();
+            var numbers = string.Format(
+                "//[{0}]\n{1}",
+                delimiter,
+                string.Join(delimiter, integers));
+
+            var actual = sut.Add(numbers);
+
+            var expected = integers.Sum();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

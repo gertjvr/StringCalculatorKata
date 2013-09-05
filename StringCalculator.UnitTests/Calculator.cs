@@ -12,8 +12,12 @@ namespace StringCalculator.UnitTests
             var numbersOnly = numbers;
 
             if (numbers.StartsWith("//"))
-            {   
-                delimiters = new[] { numbers.Skip(2).First().ToString() };
+            {
+                if (numbers.StartsWith("//["))
+                    delimiters = new[] { numbers.Substring(3, numbers.IndexOf(']') - 3) };
+                else
+                    delimiters = new[] { numbers.Skip(2).First().ToString() };
+
                 numbersOnly = new string(numbers.SkipWhile(c => c != '\n').ToArray());
             }
 
