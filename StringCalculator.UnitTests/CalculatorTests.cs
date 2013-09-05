@@ -16,5 +16,15 @@ namespace StringCalculator.UnitTests
             var actual = sut.Add(numbers);
             Assert.AreEqual(0, actual);
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddSingleNumberReturnsCorrectResult(
+            Calculator sut,
+            int expected)
+        {
+            var numbers = expected.ToString();
+            var actual = sut.Add(numbers);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

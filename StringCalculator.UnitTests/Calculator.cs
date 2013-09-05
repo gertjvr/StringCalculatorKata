@@ -8,7 +8,9 @@ namespace StringCalculator.UnitTests
     {
         public int Add(string numbers)
         {
-            return 0;
+            int result = 0;
+            int.TryParse(numbers, out result);
+            return result;
         }
     }
 }
