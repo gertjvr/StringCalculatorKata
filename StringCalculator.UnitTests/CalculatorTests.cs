@@ -64,5 +64,30 @@ namespace StringCalculator.UnitTests
             var actual = sut.Add(numbers);
             Assert.AreEqual(x + y + z, actual);
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddLineWithCustomDelimiterReturnsCorrectResult(
+            Calculator sut,
+            Generator<char> charGenerator,
+            int count,
+            Generator<int> intGenerator)
+        {
+            int dummy;
+            var delimiter = charGenerator
+                .Where(c => int.TryParse(c.ToString(), out dummy) == false)
+                .Where(c => c != '-')
+                .First();
+
+            var integers = intGenerator.Take(count).ToArray();
+            var numbers = string.Format(
+                "//{0}\n{1}",
+                delimiter,
+                string.Join(delimiter.ToString(), integers));
+
+            var actual = sut.Add(numbers);
+
+            var expected = integers.Sum();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
