@@ -17,10 +17,20 @@ namespace StringCalculator.UnitTests
                 numbersOnly = new string(numbers.SkipWhile(c => c != '\n').ToArray());
             }
 
-            return numbersOnly
+            var integers = numbersOnly
                 .Split(delimiters, StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => int.Parse(s))
-                .Sum();
+                .ToList();
+
+            var negatives = integers.Where(i => i < 0).ToArray();
+            if (negatives.Any())
+                throw new ArgumentOutOfRangeException(
+                    "numbers", 
+                    string.Format(
+                        "Negatives not allowed. Found {0}.",
+                        string.Join(",", negatives)));
+
+            return integers.Sum();
         }
     }
 }

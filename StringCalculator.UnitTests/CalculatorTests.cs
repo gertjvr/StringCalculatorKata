@@ -89,5 +89,22 @@ namespace StringCalculator.UnitTests
             var expected = integers.Sum();
             Assert.AreEqual(expected, actual);
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddLineWithNegativeNumberThrowsCorrectException(
+            Calculator sut,
+            int x,
+            int y,
+            int z)
+        {
+            var numbers = string.Join(",", -x, y, -z);
+
+            var e = Assert.Throws<ArgumentOutOfRangeException>(
+                () => sut.Add(numbers));
+
+            Assert.IsTrue(e.Message.StartsWith("Negatives not allowed."));
+            Assert.IsTrue(e.Message.Contains((-x).ToString()));
+            Assert.IsTrue(e.Message.Contains((-z).ToString()));
+        }
     }
 }
