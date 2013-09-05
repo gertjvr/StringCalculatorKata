@@ -8,9 +8,10 @@ namespace StringCalculator.UnitTests
     {
         public int Add(string numbers)
         {
-            int result = 0;
-            int.TryParse(numbers, out result);
-            return result;
+            return numbers
+                .Split(",".ToArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Select(s => int.Parse(s))
+                .Sum();
         }
     }
 }

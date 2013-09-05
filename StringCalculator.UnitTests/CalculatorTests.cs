@@ -26,5 +26,16 @@ namespace StringCalculator.UnitTests
             var actual = sut.Add(numbers);
             Assert.AreEqual(expected, actual);
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddTwoNumbersReturnsCorrectResult(
+            Calculator sut,
+            int x,
+            int y)
+        {
+            var numbers = string.Join(",", x, y);
+            var actual = sut.Add(numbers);
+            Assert.AreEqual(x + y, actual);
+        }
     }
 }
