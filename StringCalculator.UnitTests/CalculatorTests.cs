@@ -52,5 +52,17 @@ namespace StringCalculator.UnitTests
             var expected = intergers.Sum();
             Assert.AreEqual(expected, actual);
         }
+
+        [Test, CalculatorTestConventions]
+        public void AddWithLineBreakAndCommaAsDelimiterRetunrsCorrectResult(
+            Calculator sut,
+            int x,
+            int y,
+            int z)
+        {
+            var numbers = string.Format("{0}\n{1},{2}", x, y, z);
+            var actual = sut.Add(numbers);
+            Assert.AreEqual(x + y + z, actual);
+        }
     }
 }
