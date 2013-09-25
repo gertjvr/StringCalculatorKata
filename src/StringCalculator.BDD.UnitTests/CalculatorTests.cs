@@ -3,52 +3,13 @@ using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.NUnit2;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Scanners.StepScanners.Fluent;
 
-namespace StringCalculator.UnitTests
+namespace StringCalculator.BDD.UnitTests
 {
-    public class CalculatorOrchestration
-    {
-        public Calculator Calculator { get; protected set; }
-
-        private int _result;
-        private Exception _exception;
-
-        public void GivenACalculator(Calculator calculator)
-        {
-            Calculator = calculator;
-        }
-
-        public void WhenTheResultIsCalculated(string input)
-        {
-            _result = Calculator.Add(input);
-        }
-
-        public void ThenTheExpectedResultShouldBe(int expectedResult)
-        {
-            Assert.AreEqual(expectedResult, _result);
-        }
-
-        public void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
-        {
-            _exception = Assert.Throws<ArgumentOutOfRangeException>(() => Calculator.Add(input));
-        }
-
-        public void ThenExceptionMessageStartsWith(string message)
-        {
-            Assert.IsTrue(_exception.Message.StartsWith(message));
-        }
-
-        public void AndExceptionMessageContains(string message)
-        {
-            Assert.IsTrue(_exception.Message.Contains(message));
-        }
-    }
-
     [TestFixture]
-    public class CalculatorBDDfyTests : CalculatorOrchestration
+    public class CalculatorTests : CalculatorOrchestration
     {
         [Test, CalculatorTestConventions]
         public void AddEmptyReturnsCorrectResults(Calculator sut)
@@ -93,7 +54,7 @@ namespace StringCalculator.UnitTests
             int count,
             Generator<int> generator)
         {
-            var intergers = generator.Take(count + 2).ToArray();
+            var intergers = Enumerable.Take<int>(generator, count + 2).ToArray();
             var numbers = string.Join(",", intergers);
             var expected = intergers.Sum();
 
@@ -127,12 +88,11 @@ namespace StringCalculator.UnitTests
             Generator<int> intGenerator)
         {
             int dummy;
-            var delimiter = charGenerator
-                .Where(c => int.TryParse(c.ToString(), out dummy) == false)
+            var delimiter = Enumerable.Where<char>(charGenerator, c => int.TryParse(c.ToString(), out dummy) == false)
                 .Where(c => c != '-')
                 .First();
 
-            var integers = intGenerator.Take(count).ToArray();
+            var integers = Enumerable.Take<int>(intGenerator, count).ToArray();
             var numbers = string.Format(
                 "//{0}\n{1}",
                 delimiter,
@@ -189,7 +149,7 @@ namespace StringCalculator.UnitTests
             int count,
             Generator<int> intGenerator)
         {
-            var integers = intGenerator.Take(count).ToArray();
+            var integers = Enumerable.Take<int>(intGenerator, count).ToArray();
             var numbers = string.Format(
                 "//[{0}]\n{1}",
                 delimiter,
