@@ -55,9 +55,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestStack.BDDfy">
+      <HintPath>..\packages\TestStack.BDDfy.3.16.14\lib\NET40\TestStack.BDDfy.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
+    <Compile Include="CalculatorBDDfyTests.cs" />
     <Compile Include="CalculatorTestConventionsAttribute.cs" />
     <Compile Include="CalculatorTests.cs">
       <SubType>Code</SubType>
