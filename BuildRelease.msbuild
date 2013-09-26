@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CompleteBuild" ToolsVersion="4.0">
+    <PropertyGroup>
+        <MSBuildExtensionsPath>Lib\MSBuildCommunityTasks</MSBuildExtensionsPath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+    	<NUnitHome>Packages\NUnit.Runners.2.6.2\tools</NUnitHome>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectToBuild Include="src\*.sln" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <BuildOutput Include="src\StringCalculator\bin\Release\StringCalculator.dll" />
+    </ItemGroup>
+
+    <ItemGroup>
+    	<NUnitAddinFiles Include="$(teamcity_dotnet_nunitaddin)-2.6.2.*" />
+    	<NUnitAddinFiles Include="packages\AutoFixture.NUnit2.3.9.0\lib\net40\Ploeh.AutoFixture.NUnit2.Addins.dll" />
+    </ItemGroup>
+    
+    <!--Optional Clean targets-->
+    <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
+
+    <Target Name="CleanDebug">
+        <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
+    </Target>
+    <Target Name="CleanRelease">
+        <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
+    </Target>
+    
+    <!--Build tasks-->
+    <Target Name="Build">
+        <MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
+    </Target>
+    
+    <Target Name="RunTests" DependsOnTargets="Build">
+        <MakeDir Directories="$(NUnitHome)\addins" />
+	  	<Copy SourceFiles="@(NUnitAddinFiles)" DestinationFolder="$(NUnitHome)\addins" />
+	  	<Exec Command="$(NUnitHome)\NUnit-Console.exe src\StringCalculator.UnitTests\bin\Release\StringCalculator.UnitTests.dll" />
+	  	<Exec Command="$(NUnitHome)\NUnit-Console.exe src\StringCalculator.BDD.UnitTests\bin\Release\StringCalculator.BDD.UnitTests.dll" />
+    </Target>
+
+    <Target Name="CompleteBuild" DependsOnTargets="RunTests" />
+</Project>
