@@ -13,23 +13,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <BuildOutput Include="src\StringCalculator\bin\Release\StringCalculator.dll" />
-    </ItemGroup>
-
-    <ItemGroup>
     	<NUnitAddinFiles Include="$(teamcity_dotnet_nunitaddin)-2.6.2.*" />
     	<NUnitAddinFiles Include="packages\AutoFixture.NUnit2.3.9.0\lib\net40\Ploeh.AutoFixture.NUnit2.Addins.dll" />
     </ItemGroup>
-    
-    <!--Optional Clean targets-->
-    <Target Name="CleanAll" DependsOnTargets="CleanDebug;CleanRelease" />
-
-    <Target Name="CleanDebug">
-        <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Debug" />
-    </Target>
-    <Target Name="CleanRelease">
-        <MSBuild Projects="@(ProjectToBuild)" Targets="Clean" Properties="Configuration=Release" />
-    </Target>
     
     <!--Build tasks-->
     <Target Name="Build">
