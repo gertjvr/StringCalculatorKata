@@ -32,26 +32,26 @@
   <ItemGroup>
     <Reference Include="NSubstitute, Version=1.6.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSubstitute.1.6.1.0\lib\NET40\NSubstitute.dll</HintPath>
+      <HintPath>..\..\Packages\NSubstitute.1.6.1.0\lib\NET40\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\Packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=3.9.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoFixture.3.9.0\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+      <HintPath>..\..\Packages\AutoFixture.3.9.0\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture.AutoNSubstitute, Version=3.9.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoFixture.AutoNSubstitute.3.9.0\lib\net40\Ploeh.AutoFixture.AutoNSubstitute.dll</HintPath>
+      <HintPath>..\..\Packages\AutoFixture.AutoNSubstitute.3.9.0\lib\net40\Ploeh.AutoFixture.AutoNSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture.NUnit2, Version=3.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoFixture.NUnit2.3.9.0\lib\net40\Ploeh.AutoFixture.NUnit2.dll</HintPath>
+      <HintPath>..\..\Packages\AutoFixture.NUnit2.3.9.0\lib\net40\Ploeh.AutoFixture.NUnit2.dll</HintPath>
     </Reference>
     <Reference Include="Ploeh.AutoFixture.NUnit2.Addins, Version=3.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutoFixture.NUnit2.3.9.0\lib\net40\Ploeh.AutoFixture.NUnit2.Addins.dll</HintPath>
+      <HintPath>..\..\Packages\AutoFixture.NUnit2.3.9.0\lib\net40\Ploeh.AutoFixture.NUnit2.Addins.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StringCalculator\StringCalculator.csproj">
-      <Project>{24515E4E-E75A-4C75-8E52-77A67225AB2F}</Project>
+      <Project>{24515e4e-e75a-4c75-8e52-77a67225ab2f}</Project>
       <Name>StringCalculator</Name>
     </ProjectReference>
   </ItemGroup>
