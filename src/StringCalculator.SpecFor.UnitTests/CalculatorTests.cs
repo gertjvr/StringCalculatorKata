@@ -6,7 +6,6 @@ using Ploeh.AutoFixture.AutoNSubstitute;
 
 namespace StringCalculator.SpecFor.UnitTests
 {
-    [TestFixture]
     public abstract class CalculatorSpecFor : AutoSpecFor<Calculator>
     {
         protected string Numbers { get; set; }
