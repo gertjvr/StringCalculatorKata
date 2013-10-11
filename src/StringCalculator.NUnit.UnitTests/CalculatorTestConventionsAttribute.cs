@@ -2,7 +2,7 @@
 using Ploeh.AutoFixture.AutoNSubstitute;
 using Ploeh.AutoFixture.NUnit2;
 
-namespace StringCalculator.UnitTests
+namespace StringCalculator.NUnit.UnitTests
 {
     public class CalculatorTestConventionsAttribute : AutoDataAttribute
     {

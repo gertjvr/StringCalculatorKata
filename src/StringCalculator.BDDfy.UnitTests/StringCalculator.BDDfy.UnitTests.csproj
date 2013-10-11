@@ -7,8 +7,8 @@
     <ProjectGuid>{060CCDA1-22E0-4F75-A817-0534A3A907FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StringCalculator.BDD.UnitTests</RootNamespace>
-    <AssemblyName>StringCalculator.BDD.UnitTests</AssemblyName>
+    <RootNamespace>StringCalculator.BDDfy.UnitTests</RootNamespace>
+    <AssemblyName>StringCalculator.BDDfy.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

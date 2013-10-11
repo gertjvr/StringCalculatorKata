@@ -7,8 +7,8 @@
     <ProjectGuid>{DFEDA25D-F95C-402B-AF5E-93CE4686B3FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StringCalculator.UnitTests</RootNamespace>
-    <AssemblyName>StringCalculator.UnitTests</AssemblyName>
+    <RootNamespace>StringCalculator.NUnit.UnitTests</RootNamespace>
+    <AssemblyName>StringCalculator.NUnit.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

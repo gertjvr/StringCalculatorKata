@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 
-namespace StringCalculator.UnitTests
+namespace StringCalculator.NUnit.UnitTests
 {
     [TestFixture]
     public class CalculatorTests

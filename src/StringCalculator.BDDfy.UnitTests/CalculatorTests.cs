@@ -6,7 +6,7 @@ using Ploeh.AutoFixture;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Scanners.StepScanners.Fluent;
 
-namespace StringCalculator.BDD.UnitTests
+namespace StringCalculator.BDDfy.UnitTests
 {
     [TestFixture]
     public class CalculatorTests : CalculatorOrchestration
