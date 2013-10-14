@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace StringCalculator.BDDfy.UnitTests
+namespace StringCalculator.BDDfy.NUnit.UnitTests
 {
     public class CalculatorOrchestration
     {
