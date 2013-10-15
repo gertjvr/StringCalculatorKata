@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Test" ToolsVersion="4.0">
+    
+    <PropertyGroup>
+        <XUnitPath>..\..\packages\xunit.1.9.2\lib\net20</XUnitPath>
+    </PropertyGroup>
+
+    <UsingTask TaskName="Xunit" AssemblyFile="$(XUnitPath)\xunit.runner.msbuild.dll" />
+
+    <Target Name="Test">
+        <Xunit Assemblies="bin\Release\StringCalculator.Xunit.UnitTests.dll" />
+    </Target>
+
+</Project>
