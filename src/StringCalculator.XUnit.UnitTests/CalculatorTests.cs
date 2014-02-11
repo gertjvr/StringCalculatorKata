@@ -9,7 +9,7 @@ namespace StringCalculator.Xunit.UnitTests
     public class CalculatorTests
     {
         [Theory, CalculatorTestConventions]
-        public void AddEmptyReturnsCorrectResults(
+        public void AddEmptyReturnsCorrectResult(
             Calculator sut)
         {
             var numbers = "";

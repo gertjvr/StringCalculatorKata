@@ -12,7 +12,7 @@ namespace StringCalculator.BDDfy.NUnit.UnitTests
     public class CalculatorTests : CalculatorOrchestration
     {
         [Test, CalculatorTestConventions]
-        public void AddEmptyReturnsCorrectResults(Calculator sut)
+        public void AddEmptyReturnsCorrectResult(Calculator sut)
         {   
             this.Given(t => t.GivenACalculator(sut))
                 .When(t => t.WhenTheResultIsCalculated(""))

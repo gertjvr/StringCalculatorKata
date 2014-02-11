@@ -11,7 +11,7 @@ namespace StringCalculator.BDDfy.Xunit.UnitTests
     public class CalculatorTests : CalculatorOrchestration
     {
         [Theory, CalculatorTestConventions]
-        public void AddEmptyReturnsCorrectResults(Calculator sut)
+        public void AddEmptyReturnsCorrectResult(Calculator sut)
         {   
             this.Given(t => t.GivenACalculator(sut))
                 .When(t => t.WhenTheResultIsCalculated(""))
