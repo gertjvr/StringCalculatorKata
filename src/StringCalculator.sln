@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.SpecFor.NUnit.UnitTests", "StringCalculator.SpecFor.NUnit.UnitTests\StringCalculator.SpecFor.NUnit.UnitTests.csproj", "{BBCE1FA0-C202-4D80-8F3F-3FA30611ABC1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FF858E97-1168-4C75-A01E-CA2A6C4158EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.Fixie.UnitTests", "StringCalculator.Fixie.UnitTests\StringCalculator.Fixie.UnitTests.csproj", "{61615C81-DE2E-4B81-8D2D-88B895C59A48}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
@@ -56,6 +58,10 @@ Global
 		{BBCE1FA0-C202-4D80-8F3F-3FA30611ABC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBCE1FA0-C202-4D80-8F3F-3FA30611ABC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBCE1FA0-C202-4D80-8F3F-3FA30611ABC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61615C81-DE2E-4B81-8D2D-88B895C59A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61615C81-DE2E-4B81-8D2D-88B895C59A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61615C81-DE2E-4B81-8D2D-88B895C59A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61615C81-DE2E-4B81-8D2D-88B895C59A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

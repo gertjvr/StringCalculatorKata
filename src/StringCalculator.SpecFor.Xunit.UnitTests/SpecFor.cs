@@ -22,16 +22,6 @@ namespace StringCalculator.SpecFor.Xunit.UnitTests
 
             _initialized = true;
         }
-
-        protected void CheckExists(object value)
-        {
-            Assert.NotNull(value);
-        }
-
-        protected void CheckValue<TValue>(TValue expectedValue, TValue actualValue)
-        {
-            Assert.Equal(expectedValue, actualValue);
-        }
     }
 
     public class ThenAttribute : FactAttribute
