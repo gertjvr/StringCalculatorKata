@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
+using Shouldly;
 
 namespace StringCalculator.NUnit.SpecFor.UnitTests
 {
@@ -39,7 +40,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -62,7 +63,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -88,7 +89,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -115,7 +116,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -142,7 +143,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -181,7 +182,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -210,12 +211,12 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ThrowsCorrectException()
         {
-            var e = Assert.Throws<ArgumentOutOfRangeException>(
+            var e = Should.Throw<ArgumentOutOfRangeException>(
                 () => Subject.Add(Numbers));
 
-            Assert.IsTrue(e.Message.StartsWith("Negatives not allowed."));
-            Assert.IsTrue(e.Message.Contains((-x).ToString()));
-            Assert.IsTrue(e.Message.Contains((-z).ToString()));
+            e.Message.ShouldStartWith("Negatives not allowed.");
+            e.Message.ShouldContain((-x).ToString());
+            e.Message.ShouldContain((-z).ToString());
         }
     }
 
@@ -244,7 +245,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -277,7 +278,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -313,7 +314,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 }

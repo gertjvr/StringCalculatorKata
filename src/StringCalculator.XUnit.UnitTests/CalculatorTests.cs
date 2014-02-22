@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Ploeh.AutoFixture;
-using Xunit;
+using Shouldly;
 using Xunit.Extensions;
 
 namespace StringCalculator.Xunit.UnitTests
@@ -14,7 +14,7 @@ namespace StringCalculator.Xunit.UnitTests
         {
             var numbers = "";
             var actual = sut.Add(numbers);
-            Assert.Equal(0, actual);
+            actual.ShouldBe(0);
         }
 
         [Theory, CalculatorTestConventions]
@@ -24,7 +24,7 @@ namespace StringCalculator.Xunit.UnitTests
         {
             var numbers = expected.ToString();
             var actual = sut.Add(numbers);
-            Assert.Equal(expected, actual);
+            actual.ShouldBe(expected);
         }
 
         [Theory, CalculatorTestConventions]
@@ -35,7 +35,9 @@ namespace StringCalculator.Xunit.UnitTests
         {
             var numbers = string.Join(",", x, y);
             var actual = sut.Add(numbers);
-            Assert.Equal(x + y, actual);
+
+            var expected = x + y;
+            actual.ShouldBe(expected);
         }
 
         [Theory, CalculatorTestConventions]
@@ -50,7 +52,7 @@ namespace StringCalculator.Xunit.UnitTests
             var actual = sut.Add(numbers);
 
             var expected = intergers.Sum();
-            Assert.Equal(expected, actual);
+            actual.ShouldBe(expected);
         }
 
         [Theory, CalculatorTestConventions]
@@ -62,7 +64,9 @@ namespace StringCalculator.Xunit.UnitTests
         {
             var numbers = string.Format("{0}\n{1},{2}", x, y, z);
             var actual = sut.Add(numbers);
-            Assert.Equal(x + y + z, actual);
+
+            var expected = x + y + z;
+            actual.ShouldBe(expected);
         }
 
         [Theory, CalculatorTestConventions]
@@ -87,7 +91,7 @@ namespace StringCalculator.Xunit.UnitTests
             var actual = sut.Add(numbers);
 
             var expected = integers.Sum();
-            Assert.Equal(expected, actual);
+            actual.ShouldBe(expected);
         }
 
         [Theory, CalculatorTestConventions]
@@ -99,12 +103,12 @@ namespace StringCalculator.Xunit.UnitTests
         {
             var numbers = string.Join(",", -x, y, -z);
 
-            var e = Assert.Throws<ArgumentOutOfRangeException>(
+            var e = Should.Throw<ArgumentOutOfRangeException>(
                 () => sut.Add(numbers));
 
-            Assert.True(e.Message.StartsWith("Negatives not allowed."));
-            Assert.True(e.Message.Contains((-x).ToString()));
-            Assert.True(e.Message.Contains((-z).ToString()));
+            e.Message.ShouldStartWith("Negatives not allowed.");
+            e.Message.ShouldContain((-x).ToString());
+            e.Message.ShouldContain((-z).ToString());
         }
 
         [Theory, CalculatorTestConventions]
@@ -119,7 +123,7 @@ namespace StringCalculator.Xunit.UnitTests
 
             var actual = sut.Add(numbers);
 
-            Assert.Equal(x, actual);
+            actual.ShouldBe(x);
         }
 
         [Theory, CalculatorTestConventions]
@@ -138,7 +142,7 @@ namespace StringCalculator.Xunit.UnitTests
             var actual = sut.Add(numbers);
 
             var expected = integers.Sum();
-            Assert.Equal(expected, actual);
+            actual.ShouldBe(expected);
         }
 
         [Theory, CalculatorTestConventions]
@@ -161,7 +165,7 @@ namespace StringCalculator.Xunit.UnitTests
             var actual = sut.Add(numbers);
 
             var expected = x + y + z;
-            Assert.Equal(expected, actual);
+            actual.ShouldBe(expected);
         }
     }
 }

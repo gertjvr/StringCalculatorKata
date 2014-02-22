@@ -17,16 +17,6 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
             Subject = Given();
             When();
         }
-
-        protected void CheckExists(object value)
-        {
-            Assert.IsNotNull(value);
-        }
-
-        protected void CheckValue<TValue>(TValue expectedValue, TValue actualValue)
-        {
-            Assert.AreEqual(expectedValue, actualValue);
-        }
     }
 
     public class ThenAttribute : TestAttribute

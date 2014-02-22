@@ -1,44 +1,44 @@
 using System;
-using Xunit;
+using Shouldly;
 
 namespace StringCalculator.Xunit.BDDfy.UnitTests
 {
     public class CalculatorOrchestration
     {
-        public Calculator Calculator { get; protected set; }
+        private Calculator Calculator { get; set; }
 
         private int _result;
 
         private Exception _exception;
 
-        public void GivenACalculator(Calculator calculator)
+        protected void GivenACalculator(Calculator calculator)
         {
             Calculator = calculator;
         }
 
-        public void WhenTheResultIsCalculated(string input)
+        protected void WhenTheResultIsCalculated(string input)
         {
             _result = Calculator.Add(input);
         }
 
-        public void ThenTheExpectedResultShouldBe(int expectedResult)
+        protected void ThenTheExpectedResultShouldBe(int expectedResult)
         {
-            Assert.Equal(expectedResult, _result);
+            _result.ShouldBe(expectedResult);
         }
 
-        public void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
+        protected void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
         {
-            _exception = Assert.Throws<ArgumentOutOfRangeException>(() => Calculator.Add(input));
+            _exception = Should.Throw<ArgumentOutOfRangeException>(() => Calculator.Add(input));
         }
 
-        public void ThenExceptionMessageStartsWith(string message)
+        protected void ThenExceptionMessageStartsWith(string message)
         {
-            Assert.True(_exception.Message.StartsWith(message));
+            _exception.Message.ShouldStartWith(message);
         }
 
-        public void AndExceptionMessageContains(string message)
+        protected void AndExceptionMessageContains(string message)
         {
-            Assert.True(_exception.Message.Contains(message));
+            _exception.Message.ShouldContain(message);
         }
     }
 }

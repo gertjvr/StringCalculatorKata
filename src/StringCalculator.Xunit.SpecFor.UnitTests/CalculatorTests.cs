@@ -2,7 +2,7 @@
 using System.Linq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
-using Xunit;
+using Shouldly;
 
 namespace StringCalculator.Xunit.SpecFor.UnitTests
 {
@@ -40,7 +40,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -64,7 +64,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -91,7 +91,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -119,7 +119,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -147,7 +147,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -187,7 +187,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -217,12 +217,12 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            var e = Assert.Throws<ArgumentOutOfRangeException>(
+            var e = Should.Throw<ArgumentOutOfRangeException>(
                 () => Subject.Add(Numbers));
 
-            Assert.True(e.Message.StartsWith("Negatives not allowed."));
-            Assert.True(e.Message.Contains((-x).ToString()));
-            Assert.True(e.Message.Contains((-z).ToString()));
+            e.Message.ShouldStartWith("Negatives not allowed.");
+            e.Message.ShouldContain((-x).ToString());
+            e.Message.ShouldContain((-z).ToString());
         }
     }
 
@@ -252,7 +252,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -286,7 +286,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 
@@ -323,7 +323,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
         {
             Run();
 
-            Assert.Equal(Expected, Result);
+            Result.ShouldBe(Expected);
         }
     }
 }
