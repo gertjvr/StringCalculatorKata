@@ -4,7 +4,7 @@ using System.Reflection;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace StringCalculator.Fixie.UnitTests
+namespace StringCalculator.Fixie.UnitTests.AutoFixture
 {
     /// <summary>
     /// An attribute that can be applied to parameters in an <see cref="IEnumerable{T}"/>-driven

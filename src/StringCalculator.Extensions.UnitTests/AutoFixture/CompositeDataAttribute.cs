@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace StringCalculator.Fixie.UnitTests.AutoFixture
+namespace StringCalculator.Extensions.UnitTests.AutoFixture
 {
     /// <summary>
     /// An implementation of TestCaseDataAttribute that composes other TestCaseDataAttribute instances.

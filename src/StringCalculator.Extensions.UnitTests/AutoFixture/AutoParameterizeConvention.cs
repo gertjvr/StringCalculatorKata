@@ -4,21 +4,20 @@ using System.Linq;
 using System.Reflection;
 using Fixie;
 using Fixie.Conventions;
-using StringCalculator.Fixie.UnitTests.AutoFixture;
 
-namespace StringCalculator.Fixie.UnitTests
+namespace StringCalculator.Extensions.UnitTests.AutoFixture
 {
-    public class CustomConvention : Convention
+    public class AutoParameterizeConvention : Convention
     {
-        public CustomConvention()
+        public AutoParameterizeConvention()
         {
             Classes
                 .NameEndsWith("Tests");
 
             Methods
-                .Where(method => method.IsVoid());
-                //.Where(m => m.Name.EndsWith("ReturnsCorrectResult"))
-                //.Where(m => m.Name.EndsWith("ThrowsCorrectException"));
+                .Where(method => method.IsVoid())
+                .Where(m => m.Name.EndsWith("ReturnsCorrectResult"))
+                .Where(m => m.Name.EndsWith("ThrowsCorrectException"));
 
             Parameters(GetData);
 

@@ -2,28 +2,22 @@
 using System.Reflection;
 using Ploeh.AutoFixture;
 
-namespace StringCalculator.Fixie.UnitTests.AutoFixture
+namespace StringCalculator.Extensions.UnitTests.AutoFixture
 {
     /// <summary>
     /// An attribute that can be applied to parameters in an <see cref="IFixture"/>-driven
-    /// TestCase to indicate that the parameter value should be frozen so that the same instance is
-    /// returned every time the <see cref="AutoDataAttribute"/> creates an instance of that type.
+    /// TestCase to indicate that the parameter value should not have properties auto populated
+    /// when the <see cref="AutoDataAttribute"/> creates an instance of that type.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
-    public sealed class FrozenAttribute : CustomizeAttribute
+    public sealed class NoAutoPropertiesAttribute : CustomizeAttribute
     {
         /// <summary>
-        /// Gets or sets the <see cref="Type"/> that the frozen parameter value
-        /// should be mapped to in the <see cref="IFixture"/>.
-        /// </summary>
-        public Type As { get; set; }
-
-        /// <summary>
-        /// Gets a customization that freezes the <see cref="Type"/> of the parameter.
+        /// Gets a customization that stops auto population of properties for the type of the parameter.
         /// </summary>
         /// <param name="parameter">The parameter for which the customization is requested.</param>
         /// <returns>
-        /// A customization that freezes the <see cref="Type"/> of the parameter.
+        /// A customization that stops auto population of the <see cref="Type"/> of the parameter.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="parameter"/> is null.
@@ -36,7 +30,7 @@ namespace StringCalculator.Fixie.UnitTests.AutoFixture
             }
 
             var targetType = parameter.ParameterType;
-            return new FreezingCustomization(targetType, As ?? targetType);
+            return new NoAutoPropertiesCustomization(targetType);
         }
     }
 }

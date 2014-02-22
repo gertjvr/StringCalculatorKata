@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace StringCalculator.Fixie.UnitTests.AutoFixture
+namespace StringCalculator.Extensions.UnitTests.AutoFixture
 {
     /// <summary>
     /// Abstract attribute which represents a testcase provider for a testcase.

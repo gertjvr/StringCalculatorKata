@@ -3,7 +3,7 @@ using System.Reflection;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace StringCalculator.Fixie.UnitTests.AutoFixture
+namespace StringCalculator.Extensions.UnitTests.AutoFixture
 {
     /// <summary>
     /// An attribute that can be applied to parameters in an <see cref="AutoDataAttribute"/>-driven
@@ -19,8 +19,8 @@ namespace StringCalculator.Fixie.UnitTests.AutoFixture
         /// </summary>
         /// <param name="parameter">The parameter for which the customization is requested.</param>
         /// <returns>
-        /// A customization that associates a <see cref="ArrayFavoringConstructorQuery"/> with the
-        /// <see cref="Type"/> of the parameter.
+        /// A customization that associates a <see cref="Type"/> with the
+        /// <see cref="ArrayFavoringConstructorQuery"/> of the parameter.
         /// </returns>
         public override ICustomization GetCustomization(ParameterInfo parameter)
         {

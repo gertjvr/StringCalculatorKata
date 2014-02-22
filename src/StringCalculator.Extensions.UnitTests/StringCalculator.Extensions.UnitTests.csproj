@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{61615C81-DE2E-4B81-8D2D-88B895C59A48}</ProjectGuid>
+    <ProjectGuid>{57779EF7-272F-4D2A-942E-7608E7B8A19E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StringCalculator.Fixie.UnitTests</RootNamespace>
-    <AssemblyName>StringCalculator.Fixie.UnitTests</AssemblyName>
+    <RootNamespace>StringCalculator.Extensions.UnitTests</RootNamespace>
+    <AssemblyName>StringCalculator.Extensions.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,18 +34,13 @@
       <HintPath>..\..\Packages\Fixie.0.0.1.133\lib\net45\Fixie.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute">
-      <HintPath>..\..\Packages\NSubstitute.1.6.1.0\lib\NET40\NSubstitute.dll</HintPath>
+      <HintPath>..\..\Packages\NSubstitute.1.4.0.0\lib\NET40\NSubstitute.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture, Version=3.16.5.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\..\Packages\AutoFixture.3.16.5\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture.AutoNSubstitute, Version=3.16.5.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Ploeh.AutoFixture.AutoNSubstitute">
       <HintPath>..\..\Packages\AutoFixture.AutoNSubstitute.3.16.5\lib\net40\Ploeh.AutoFixture.AutoNSubstitute.dll</HintPath>
-    </Reference>
-    <Reference Include="Shouldly">
-      <HintPath>..\..\Packages\Shouldly.1.1.1.1\lib\35\Shouldly.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,13 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoFixture\AutoDataAttribute.cs" />
-    <Compile Include="AutoFixture\DataAttribute.cs" />
-    <Compile Include="BehaviorBuilderExtensions.cs" />
-    <Compile Include="CalculatorTestConventionsAttribute.cs" />
-    <Compile Include="CalculatorTests.cs" />
     <Compile Include="AutoFixture\CompositeDataAttribute.cs" />
-    <Compile Include="CustomConvention.cs" />
     <Compile Include="AutoFixture\CustomizeAttribute.cs" />
+    <Compile Include="AutoFixture\DataAttribute.cs" />
     <Compile Include="AutoFixture\FavorArraysAttribute.cs" />
     <Compile Include="AutoFixture\FavorEnumerablesAttribute.cs" />
     <Compile Include="AutoFixture\FavorListsAttribute.cs" />
@@ -71,17 +62,14 @@
     <Compile Include="AutoFixture\GreedyAttribute.cs" />
     <Compile Include="AutoFixture\ModestAttribute.cs" />
     <Compile Include="AutoFixture\NoAutoPropertiesAttribute.cs" />
+    <Compile Include="AutoFixture\BehaviorBuilderExtensions.cs" />
+    <Compile Include="AutoFixture\AutoParameterizeConvention.cs" />
+    <Compile Include="BuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StringCalculator\StringCalculator.csproj">
-      <Project>{24515E4E-E75A-4C75-8E52-77A67225AB2F}</Project>
-      <Name>StringCalculator</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

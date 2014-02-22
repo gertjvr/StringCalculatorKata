@@ -2,7 +2,7 @@
 using System.Reflection;
 using Ploeh.AutoFixture;
 
-namespace StringCalculator.Fixie.UnitTests.AutoFixture
+namespace StringCalculator.Extensions.UnitTests.AutoFixture
 {
     /// <summary>
     /// Base class for customizing parameters in methods decorated with

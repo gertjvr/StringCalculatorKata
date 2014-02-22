@@ -1,5 +1,6 @@
 ﻿using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
+using StringCalculator.Fixie.UnitTests.AutoFixture;
 
 namespace StringCalculator.Fixie.UnitTests
 {
