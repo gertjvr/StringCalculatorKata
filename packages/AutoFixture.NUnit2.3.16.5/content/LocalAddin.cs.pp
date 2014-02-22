@@ -1,6 +1,6 @@
 using NUnit.Core.Extensibility;
 
-namespace StringCalculator.NUnit.UnitTests
+namespace $rootnamespace$
 {
     [NUnitAddin]
     public class LocalAddin : Ploeh.AutoFixture.NUnit2.Addins.Addin
