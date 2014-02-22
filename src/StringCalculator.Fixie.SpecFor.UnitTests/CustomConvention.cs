@@ -4,16 +4,16 @@ using System.Linq;
 using System.Reflection;
 using Fixie;
 using Fixie.Conventions;
-using StringCalculator.Fixie.UnitTests.AutoFixture;
+using StringCalculator.Fixie.SpecFor.UnitTests.AutoFixture;
 
-namespace StringCalculator.Fixie.UnitTests
+namespace StringCalculator.Fixie.SpecFor.UnitTests
 {
     public class CustomConvention : Convention
     {
         public CustomConvention()
         {
             Classes
-                .NameEndsWith("Tests");
+                .Where(t => typeof(ISpecFor).IsAssignableFrom(t));
 
             Methods
                 .Where(method => method.IsVoid() && (method.Name.EndsWith("ReturnsCorrectResult") || method.Name.EndsWith("ThrowsCorrectException")));

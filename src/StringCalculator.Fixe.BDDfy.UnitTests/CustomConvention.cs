@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using Fixie;
 using Fixie.Conventions;
-using StringCalculator.Fixie.UnitTests.AutoFixture;
+using StringCalculator.Fixe.BDDfy.UnitTests.AutoFixture;
 
-namespace StringCalculator.Fixie.UnitTests
+namespace StringCalculator.Fixe.BDDfy.UnitTests
 {
     public class CustomConvention : Convention
     {
