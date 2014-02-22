@@ -34,5 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
-//[assembly: NUnit.Framework.RequiredAddin(Ploeh.AutoFixture.NUnit2.Addins.Constants.AutoDataExtension)]

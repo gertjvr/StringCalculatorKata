@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator", "StringCalculator\StringCalculator.csproj", "{24515E4E-E75A-4C75-8E52-77A67225AB2F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.NUnit.UnitTests", "StringCalculator.NUnit.UnitTests\StringCalculator.NUnit.UnitTests.csproj", "{DFEDA25D-F95C-402B-AF5E-93CE4686B3FF}"
@@ -14,6 +16,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.BDDfy.NUnit.UnitTests", "StringCalculator.BDDfy.NUnit.UnitTests\StringCalculator.BDDfy.NUnit.UnitTests.csproj", "{060CCDA1-22E0-4F75-A817-0534A3A907FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.SpecFor.NUnit.UnitTests", "StringCalculator.SpecFor.NUnit.UnitTests\StringCalculator.SpecFor.NUnit.UnitTests.csproj", "{BBCE1FA0-C202-4D80-8F3F-3FA30611ABC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FF858E97-1168-4C75-A01E-CA2A6C4158EB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

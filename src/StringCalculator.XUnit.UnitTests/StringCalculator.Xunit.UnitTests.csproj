@@ -30,17 +30,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NSubstitute">
-      <HintPath>..\..\Packages\NSubstitute.1.6.1.0\lib\NET40\NSubstitute.dll</HintPath>
+    <Reference Include="NSubstitute, Version=1.7.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\NSubstitute.1.7.1.0\lib\NET40\NSubstitute.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture">
-      <HintPath>..\..\Packages\AutoFixture.3.10.1\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture, Version=3.16.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\AutoFixture.3.16.6\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture.AutoNSubstitute">
-      <HintPath>..\..\Packages\AutoFixture.AutoNSubstitute.3.10.1\lib\net40\Ploeh.AutoFixture.AutoNSubstitute.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture.AutoNSubstitute, Version=3.16.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\AutoFixture.AutoNSubstitute.3.16.6\lib\net40\Ploeh.AutoFixture.AutoNSubstitute.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture.Xunit">
-      <HintPath>..\..\Packages\AutoFixture.Xunit.3.10.1\lib\net40\Ploeh.AutoFixture.Xunit.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture.Xunit, Version=3.16.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\AutoFixture.Xunit.3.16.6\lib\net40\Ploeh.AutoFixture.Xunit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
