@@ -63,7 +63,7 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
         }
 
         [CalculatorTestConventions]
-        public void AddWithLineBreakAndCommaAsDelimiterRetunrsCorrectResult(
+        public void AddWithLineBreakAndCommaAsDelimiterReturnsCorrectResult(
             Calculator sut,
             int x,
             int y,
@@ -124,7 +124,7 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
         }
 
         [CalculatorTestConventions]
-        public void AddIgnoresBigNumbers(
+        public void AddIgnoresBigNumbersReturnsCorrectResult(
             Calculator sut,
             int smallSeed,
             int bigSeed)
