@@ -7,8 +7,8 @@
     <ProjectGuid>{096105CB-2F8A-4EC8-8701-CDA610ADEACF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AutoFixture.Fixie</RootNamespace>
-    <AssemblyName>AutoFixture.Fixie</AssemblyName>
+    <RootNamespace>Ploeh.AutoFixture.Fixie</RootNamespace>
+    <AssemblyName>Ploeh.AutoFixture.Fixie</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoDataAttribute.cs" />
+    <Compile Include="AutoCaseParameters.cs" />
     <Compile Include="CompositeDataAttribute.cs" />
     <Compile Include="CustomizeAttribute.cs" />
     <Compile Include="DataAttribute.cs" />

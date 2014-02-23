@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace AutoFixture.Fixie
+namespace Ploeh.AutoFixture.Fixie
 {
     /// <summary>
     /// Abstract attribute which represents a testcase provider for a testcase.

@@ -4,7 +4,7 @@ using System.Reflection;
 using Fixie;
 using Fixie.Conventions;
 
-namespace AutoFixture.Fixie
+namespace Ploeh.AutoFixture.Fixie
 {
     public static class BehaviorBuilderExtensions
     {

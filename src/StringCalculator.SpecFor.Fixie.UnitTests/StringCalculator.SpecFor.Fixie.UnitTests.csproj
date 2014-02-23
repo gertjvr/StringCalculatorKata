@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoSpecFor.cs" />
-    <Compile Include="CalculatorTestConventionsAttribute.cs" />
     <Compile Include="CalculatorTests.cs" />
     <Compile Include="CustomConvention.cs" />
     <Compile Include="ISpecFor.cs" />

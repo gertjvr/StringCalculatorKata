@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace AutoFixture.Fixie
+namespace Ploeh.AutoFixture.Fixie
 {
     /// <summary>
     /// An implementation of TestCaseDataAttribute that composes other TestCaseDataAttribute instances.

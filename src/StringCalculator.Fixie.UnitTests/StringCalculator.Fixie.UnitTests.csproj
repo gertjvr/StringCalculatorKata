@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculatorTestConventionsAttribute.cs" />
     <Compile Include="CalculatorTests.cs" />
     <Compile Include="CustomConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

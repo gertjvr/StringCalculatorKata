@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoFixture.Fixie;
 using Fixie;
 using Fixie.Conventions;
+using Ploeh.AutoFixture.Fixie;
 
 namespace StringCalculator.SpecFor.Fixie.UnitTests
 {
@@ -18,8 +18,6 @@ namespace StringCalculator.SpecFor.Fixie.UnitTests
             Methods
                 .Where(method => method.IsVoid() && (method.Name.EndsWith("ReturnsCorrectResult") || method.Name.EndsWith("ThrowsCorrectException")));
 
-            Parameters(GetData);
-
             ClassExecution
                 .CreateInstancePerTestClass()
                 .SortCases((caseA, caseB) => String.Compare(caseA.Name, caseB.Name, StringComparison.Ordinal));
@@ -29,16 +27,6 @@ namespace StringCalculator.SpecFor.Fixie.UnitTests
 
             CaseExecution
                 .SetUpTearDown("SetUp", "TearDown");
-        }
-
-        private IEnumerable<object[]> GetData(MethodInfo methodInfo)
-        {
-            var data = (DataAttribute)methodInfo.GetCustomAttributes(typeof(DataAttribute), true).FirstOrDefault();
-
-            if (data == null)
-                return new List<object[]>();
-
-            return data.GetData(methodInfo);
         }
     }
 }

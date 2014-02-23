@@ -1,9 +1,8 @@
 using System;
 using System.Reflection;
-using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
 
-namespace AutoFixture.Fixie
+namespace Ploeh.AutoFixture.Fixie
 {
     /// <summary>
     /// An attribute that can be applied to parameters in an <see cref="AutoDataAttribute"/>-driven

@@ -1,8 +1,7 @@
 using System;
 using System.Reflection;
-using Ploeh.AutoFixture;
 
-namespace AutoFixture.Fixie
+namespace Ploeh.AutoFixture.Fixie
 {
     /// <summary>
     /// Base class for customizing parameters in methods decorated with

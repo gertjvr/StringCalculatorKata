@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Ploeh.AutoFixture;
 using TestStack.BDDfy;
 using TestStack.BDDfy.Scanners.StepScanners.Fluent;
 
@@ -9,7 +9,6 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
 {
     public class CalculatorTests : CalculatorOrchestration
     {
-        [CalculatorTestConventions]
         public void AddEmptyReturnsCorrectResult(Calculator sut)
         {
             this.Given(t => t.GivenACalculator(sut))
@@ -18,7 +17,6 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddSingleNumberReturnsCorrectResult(
             Calculator sut,
             int expected)
@@ -31,7 +29,6 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddTwoNumbersReturnsCorrectResult(
             Calculator sut,
             int x,
@@ -46,11 +43,10 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddAnyAmountOfNumbersReturnsCorrectResult(
             Calculator sut,
             int count,
-            Generator<int> generator)
+            IEnumerable<int> generator)
         {
             var intergers = Enumerable.Take<int>(generator, count + 2).ToArray();
             var numbers = string.Join(",", intergers);
@@ -62,7 +58,6 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddWithLineBreakAndCommaAsDelimiterReturnsCorrectResult(
             Calculator sut,
             int x,
@@ -78,12 +73,11 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddLineWithCustomDelimiterReturnsCorrectResult(
             Calculator sut,
-            Generator<char> charGenerator,
+            IEnumerable<char> charGenerator,
             int count,
-            Generator<int> intGenerator)
+            IEnumerable<int> intGenerator)
         {
             int dummy;
             var delimiter = Enumerable.Where<char>(charGenerator, c => int.TryParse(c.ToString(), out dummy) == false)
@@ -104,7 +98,6 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddLineWithNegativeNumberThrowsCorrectException(
             Calculator sut,
             int x,
@@ -123,7 +116,6 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddIgnoresBigNumbersReturnsCorrectResult(
             Calculator sut,
             int smallSeed,
@@ -140,12 +132,11 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddLineWithCustomDelimiterStringReturnsCorrectResult(
             Calculator sut,
             string delimiter,
             int count,
-            Generator<int> intGenerator)
+            IEnumerable<int> intGenerator)
         {
             var integers = Enumerable.Take<int>(intGenerator, count).ToArray();
             var numbers = string.Format(
@@ -161,7 +152,6 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
                 .BDDfy();
         }
 
-        [CalculatorTestConventions]
         public void AddLineWithMultipleCustomDelimiterStringsReturnsCorrectResult(
             Calculator sut,
             string delimiter1,

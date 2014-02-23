@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="CalculatorOrchestration.cs" />
     <Compile Include="CalculatorTests.cs" />
-    <Compile Include="CalculatorTestConventionsAttribute.cs" />
     <Compile Include="CustomConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
