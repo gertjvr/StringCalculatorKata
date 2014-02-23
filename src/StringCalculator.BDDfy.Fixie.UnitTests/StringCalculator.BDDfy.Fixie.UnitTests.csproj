@@ -68,7 +68,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StringCalculator.Core\AutoFixture.Fixie.csproj">
+    <ProjectReference Include="..\AutoFixture.Fixie\AutoFixture.Fixie.csproj">
       <Project>{096105CB-2F8A-4EC8-8701-CDA610ADEACF}</Project>
       <Name>AutoFixture.Fixie</Name>
     </ProjectReference>
