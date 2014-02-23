@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace StringCalculator.SpecFor.UnitTests
+namespace StringCalculator.SpecFor.NUnit.UnitTests
 {
     [TestFixture]
     public abstract class SpecFor<T>

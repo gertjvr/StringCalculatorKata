@@ -1,6 +1,6 @@
 ﻿using Ploeh.AutoFixture;
 
-namespace StringCalculator.SpecFor.UnitTests
+namespace StringCalculator.SpecFor.NUnit.UnitTests
 {
     public abstract class AutoSpecFor<T> : SpecFor<T>
     {

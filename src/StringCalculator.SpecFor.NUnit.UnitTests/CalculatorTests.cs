@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
 
-namespace StringCalculator.SpecFor.UnitTests
+namespace StringCalculator.SpecFor.NUnit.UnitTests
 {
     public abstract class CalculatorSpecFor : AutoSpecFor<Calculator>
     {
