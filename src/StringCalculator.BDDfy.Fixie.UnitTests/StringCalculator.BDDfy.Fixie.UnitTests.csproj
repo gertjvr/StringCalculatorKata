@@ -57,18 +57,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoFixture\AutoDataAttribute.cs" />
-    <Compile Include="AutoFixture\CompositeDataAttribute.cs" />
-    <Compile Include="AutoFixture\CustomizeAttribute.cs" />
-    <Compile Include="AutoFixture\DataAttribute.cs" />
-    <Compile Include="AutoFixture\FavorArraysAttribute.cs" />
-    <Compile Include="AutoFixture\FavorEnumerablesAttribute.cs" />
-    <Compile Include="AutoFixture\FavorListsAttribute.cs" />
-    <Compile Include="AutoFixture\FrozenAttribute.cs" />
-    <Compile Include="AutoFixture\GreedyAttribute.cs" />
-    <Compile Include="AutoFixture\ModestAttribute.cs" />
-    <Compile Include="AutoFixture\NoAutoPropertiesAttribute.cs" />
-    <Compile Include="BehaviorBuilderExtensions.cs" />
     <Compile Include="CalculatorOrchestration.cs" />
     <Compile Include="CalculatorTests.cs" />
     <Compile Include="CalculatorTestConventionsAttribute.cs" />
@@ -80,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StringCalculator.Core\AutoFixture.Fixie.csproj">
+      <Project>{096105CB-2F8A-4EC8-8701-CDA610ADEACF}</Project>
+      <Name>AutoFixture.Fixie</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StringCalculator\StringCalculator.csproj">
       <Project>{24515E4E-E75A-4C75-8E52-77A67225AB2F}</Project>
       <Name>StringCalculator</Name>

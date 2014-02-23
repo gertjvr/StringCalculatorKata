@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoFixture.Fixie;
 using Fixie;
 using Fixie.Conventions;
-using StringCalculator.SpecFor.Fixie.UnitTests.AutoFixture;
 
 namespace StringCalculator.SpecFor.Fixie.UnitTests
 {

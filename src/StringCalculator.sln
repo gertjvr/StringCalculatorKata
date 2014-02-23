@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.SpecFor.Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.BDDfy.Fixie.UnitTests", "StringCalculator.BDDfy.Fixie.UnitTests\StringCalculator.BDDfy.Fixie.UnitTests.csproj", "{C432E2A4-2813-4696-8B64-5E0F175601B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoFixture.Fixie", "AutoFixture.Fixie\AutoFixture.Fixie.csproj", "{096105CB-2F8A-4EC8-8701-CDA610ADEACF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{ABCAD35E-79D1-434C-92E4-AA6E9328BB7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,8 +73,15 @@ Global
 		{C432E2A4-2813-4696-8B64-5E0F175601B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C432E2A4-2813-4696-8B64-5E0F175601B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C432E2A4-2813-4696-8B64-5E0F175601B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{096105CB-2F8A-4EC8-8701-CDA610ADEACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{096105CB-2F8A-4EC8-8701-CDA610ADEACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{096105CB-2F8A-4EC8-8701-CDA610ADEACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{096105CB-2F8A-4EC8-8701-CDA610ADEACF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{096105CB-2F8A-4EC8-8701-CDA610ADEACF} = {ABCAD35E-79D1-434C-92E4-AA6E9328BB7B}
 	EndGlobalSection
 EndGlobal
