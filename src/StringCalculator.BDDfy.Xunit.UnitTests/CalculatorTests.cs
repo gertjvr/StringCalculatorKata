@@ -14,7 +14,7 @@ namespace StringCalculator.BDDfy.Xunit.UnitTests
         public void AddEmptyReturnsCorrectResults(Calculator sut)
         {   
             this.Given(t => t.GivenACalculator(sut))
-                .When(t => t.WhenTheResultIsCalculated(""))
+                .When(t => t.WhenTheResultIsCalculated(string.Empty))
                 .Then(t => t.ThenTheExpectedResultShouldBe(0))
                 .BDDfy();
         }

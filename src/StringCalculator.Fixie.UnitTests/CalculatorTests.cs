@@ -10,7 +10,7 @@ namespace StringCalculator.Fixie.UnitTests
         public void AddEmptyReturnsCorrectResult(
             Calculator sut)
         {
-            var numbers = "";
+            var numbers = string.Empty;
 
             sut.Add(numbers).ShouldBe(0);
         }

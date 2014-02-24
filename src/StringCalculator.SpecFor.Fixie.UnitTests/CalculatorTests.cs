@@ -24,7 +24,7 @@ namespace StringCalculator.SpecFor.Fixie.UnitTests
     {
         protected override Calculator Given()
         {
-            Numbers = "";
+            Numbers = string.Empty;
             Expected = 0;
 
             return Fixture.Create<Calculator>();

@@ -14,7 +14,8 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
 
             var numbers = string.Empty;
 
-            sut.Add(numbers).ShouldBe(0);
+            var actual = sut.Add(numbers);
+            Assert.Equal(0, actual);
         }
 
         [Fact]
@@ -25,7 +26,8 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
 
             var numbers = expected.ToString();
 
-            sut.Add(numbers).ShouldBe(expected);
+            var actual = sut.Add(numbers);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -37,7 +39,8 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
 
             var numbers = string.Join(",", x, y);
 
-            sut.Add(numbers).ShouldBe(x + y);
+            var actual = sut.Add(numbers);
+            Assert.Equal(x + y, actual);
         }
 
         [Fact]
@@ -50,7 +53,10 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
             var intergers = generator.Take(count + 2).ToArray();
             var numbers = string.Join(",", intergers);
 
-            sut.Add(numbers).ShouldBe(intergers.Sum());
+            var actual = sut.Add(numbers);
+
+            var expected = intergers.Sum();
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -86,8 +92,10 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
                 delimiter,
                 string.Join(delimiter.ToString(), integers));
 
-            sut.Add(numbers).ShouldBe(integers.Sum());
+            var actual = sut.Add(numbers);
 
+            var expected = integers.Sum();
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -100,12 +108,12 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
 
             var numbers = string.Join(",", -x, y, -z);
 
-            var e = Should.Throw<ArgumentOutOfRangeException>(
+            var e = Assert.Throws<ArgumentOutOfRangeException>(
                 () => sut.Add(numbers));
 
-            e.Message.ShouldStartWith("Negatives not allowed.");
-            e.Message.ShouldContain((-x).ToString());
-            e.Message.ShouldContain((-z).ToString());
+            Assert.True(e.Message.StartsWith("Negatives not allowed."));
+            Assert.True(e.Message.Contains((-x).ToString()));
+            Assert.True(e.Message.Contains((-z).ToString()));
         }
 
         [Fact]
@@ -119,7 +127,9 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
             var y = bigSeed + 1000;
             var numbers = string.Join(",", x, y);
 
-            sut.Add(numbers).ShouldBe(x);
+            var actual = sut.Add(numbers);
+
+            Assert.Equal(x, actual);
         }
 
         [Fact]
@@ -136,7 +146,10 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
                 delimiter,
                 string.Join(delimiter, integers));
 
-            sut.Add(numbers).ShouldBe(integers.Sum());
+            var actual = sut.Add(numbers);
+
+            var expected = integers.Sum();
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -157,7 +170,10 @@ namespace StringCalculator.ObjectMother.Xunit.UnitTests
                 y,
                 z);
 
-            sut.Add(numbers).ShouldBe(x + y + z);
+            var actual = sut.Add(numbers);
+
+            var expected = x + y + z;
+            Assert.Equal(expected, actual);
         }
     }
 }

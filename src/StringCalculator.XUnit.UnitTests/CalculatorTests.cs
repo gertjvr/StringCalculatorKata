@@ -12,7 +12,7 @@ namespace StringCalculator.Xunit.UnitTests
         public void AddEmptyReturnsCorrectResults(
             Calculator sut)
         {
-            var numbers = "";
+            var numbers = string.Empty;
             var actual = sut.Add(numbers);
             Assert.Equal(0, actual);
         }

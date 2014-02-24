@@ -12,7 +12,7 @@ namespace StringCalculator.BDDfy.Fixie.UnitTests
         public void AddEmptyReturnsCorrectResult(Calculator sut)
         {
             this.Given(t => t.GivenACalculator(sut))
-                .When(t => t.WhenTheResultIsCalculated(""))
+                .When(t => t.WhenTheResultIsCalculated(string.Empty))
                 .Then(t => t.ThenTheExpectedResultShouldBe(0))
                 .BDDfy();
         }
