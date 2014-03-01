@@ -19,8 +19,7 @@ namespace StringCalculator.Fixie.UnitTests
             Parameters(new AutoCaseParameters().GetCaseParameters);
 
             ClassExecution
-                .CreateInstancePerTestClass()
-                .SortCases((caseA, caseB) => String.Compare(caseA.Name, caseB.Name, StringComparison.Ordinal));
+                .CreateInstancePerTestClass();
 
             InstanceExecution
                 .SetUpTearDown("FixtureSetUp", "FixtureTearDown");
