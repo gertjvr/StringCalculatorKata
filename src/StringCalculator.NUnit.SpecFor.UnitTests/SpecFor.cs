@@ -5,14 +5,14 @@ using NUnit.Framework;
 namespace StringCalculator.NUnit.SpecFor.UnitTests
 {
     [TestFixture]
-    public abstract class SpecFor<T>
+    public abstract class SpecFor<T> where T : class
     {
         protected IFixture Fixture { get; }
-        
-        protected T Subject { get; private set; }
-        
-        protected SpecFor() : 
-            this(() => new Fixture().Customize(new DefaultCustomization()))
+
+        protected T Subject { get; private set; } = default!;
+
+        protected SpecFor() 
+            : this(() => new Fixture().Customize(new DefaultCustomization()))
         {
         }
 
@@ -20,7 +20,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         {
             if (fixtureFactory == null) 
                 throw new ArgumentNullException(nameof(fixtureFactory));
-            
+
             Fixture = fixtureFactory();
         }
 

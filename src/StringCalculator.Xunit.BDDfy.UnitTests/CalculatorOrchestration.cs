@@ -1,40 +1,48 @@
 using System;
 using FluentAssertions;
 using FluentAssertions.Specialized;
-using Xunit;
 
 namespace StringCalculator.Xunit.BDDfy.UnitTests
 {
     public class CalculatorOrchestration
     {
-        public Calculator Calculator { get; protected set; }
+        public Calculator? Calculator { get; private set; }
 
         private int _result;
 
-        private ExceptionAssertions<ArgumentOutOfRangeException> _exception;
+        private ExceptionAssertions<ArgumentOutOfRangeException>? _exception;
 
-        public void GivenACalculator(Calculator calculator)
+        protected void GivenACalculator(Calculator calculator)
         {
             Calculator = calculator;
         }
 
-        public void WhenTheResultIsCalculated(string input)
+        protected void WhenTheResultIsCalculated(string input)
         {
+            if (Calculator == null) 
+                throw new ArgumentNullException(nameof(Calculator));
+            
             _result = Calculator.Add(input);
         }
 
-        public void ThenTheExpectedResultShouldBe(int expectedResult)
+        protected void ThenTheExpectedResultShouldBe(int expectedResult)
         {
-            Assert.Equal(expectedResult, _result);
+            _result.Should().Be(expectedResult);
         }
 
-        public void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
+        protected void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
         {
+            if (Calculator == null) 
+                throw new ArgumentNullException(nameof(Calculator));
+            
             _exception = Calculator.Invoking(_ => _.Add(input)).Should().Throw<ArgumentOutOfRangeException>();
         }
 
-        public void ThenExceptionMessage(string expectedWildcardPattern)
+        protected void ThenExceptionMessage(string expectedWildcardPattern)
         {
+            if (_exception == null) 
+                throw new ArgumentNullException(nameof(_exception));
+            
             _exception.WithMessage(expectedWildcardPattern);
         }
     }

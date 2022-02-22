@@ -1,17 +1,16 @@
 using System;
 using FluentAssertions;
 using FluentAssertions.Specialized;
-using NUnit.Framework;
 
 namespace StringCalculator.NUnit.BDDfy.UnitTests
 {
     public class CalculatorOrchestration
     {
-        public Calculator Calculator { get; protected set; }
+        public Calculator? Calculator { get; private set; }
 
         private int _result;
 
-        private ExceptionAssertions<ArgumentOutOfRangeException> _exception;
+        private ExceptionAssertions<ArgumentOutOfRangeException>? _exception;
 
         protected void GivenACalculator(Calculator calculator)
         {
@@ -20,6 +19,9 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
 
         protected void WhenTheResultIsCalculated(string input)
         {
+            if (Calculator == null) 
+                throw new ArgumentNullException(nameof(Calculator));
+            
             _result = Calculator.Add(input);
         }
 
@@ -30,11 +32,17 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
 
         protected void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
         {
+            if (Calculator == null) 
+                throw new ArgumentNullException(nameof(Calculator));
+            
             _exception = Calculator.Invoking(_ => _.Add(input)).Should().Throw<ArgumentOutOfRangeException>();
         }
 
-        public void ThenExceptionMessage(string expectedWildcardPattern)
+        protected void ThenExceptionMessage(string expectedWildcardPattern)
         {
+            if (_exception == null) 
+                throw new ArgumentNullException(nameof(_exception));
+            
             _exception.WithMessage(expectedWildcardPattern);
         }
     }

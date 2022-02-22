@@ -5,8 +5,8 @@ namespace StringCalculator.NUnit
 {
     public class DefaultCustomization : CompositeCustomization
     {
-        public DefaultCustomization() : base(
-            new AutoNSubstituteCustomization())
+        public DefaultCustomization() 
+            : base(new AutoNSubstituteCustomization())
         {
         }
     }

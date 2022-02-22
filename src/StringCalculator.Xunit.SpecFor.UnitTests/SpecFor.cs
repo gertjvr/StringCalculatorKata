@@ -10,7 +10,7 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
 
         private bool _initialized;
 
-        protected T Subject { get; private set; }
+        protected T Subject { get; private set; } = default!;
 
         protected SpecFor() : 
             this(() => new Fixture().Customize(new DefaultCustomization()))
