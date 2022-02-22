@@ -33,13 +33,13 @@ jobs:
 
       - name: Restore NuGet packages
         run: dotnet restore
-        working-directory: ./
+        working-directory: ./src
 
       - name: Build
         run: dotnet build -c Release --no-restore
-        working-directory: ./
+        working-directory: ./src
 
       - name: Test
         run: dotnet test -c Release --logger:"console;verbosity=normal" --no-build
-        working-directory: src
+        working-directory: ./src
       
