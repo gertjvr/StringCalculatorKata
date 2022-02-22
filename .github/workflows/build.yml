@@ -40,7 +40,7 @@ jobs:
         working-directory: ./src
 
       - name: Test
-        run: dotnet test -c Release --logger:"trx;logfilename=./TestResults.xml" --no-build
+        run: dotnet test -c Release --logger:"trx;logfilename=TestResults.xml" --no-build
         working-directory: ./src
 
       - name: Upload
@@ -48,5 +48,5 @@ jobs:
         if: success() || failure()        # run this step even if previous step failed
         with:
           name: test-results
-          path: ./TestResults.xml
+          path: ./src/TestResults.xml
       
