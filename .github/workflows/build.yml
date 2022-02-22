@@ -1,4 +1,4 @@
-name: StringCalculator
+name: CI
 env:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: true
