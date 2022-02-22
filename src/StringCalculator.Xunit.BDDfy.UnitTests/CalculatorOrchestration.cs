@@ -1,4 +1,6 @@
 using System;
+using FluentAssertions;
+using FluentAssertions.Specialized;
 using Xunit;
 
 namespace StringCalculator.Xunit.BDDfy.UnitTests
@@ -9,7 +11,7 @@ namespace StringCalculator.Xunit.BDDfy.UnitTests
 
         private int _result;
 
-        private Exception _exception;
+        private ExceptionAssertions<ArgumentOutOfRangeException> _exception;
 
         public void GivenACalculator(Calculator calculator)
         {
@@ -28,17 +30,12 @@ namespace StringCalculator.Xunit.BDDfy.UnitTests
 
         public void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
         {
-            _exception = Assert.Throws<ArgumentOutOfRangeException>(() => Calculator.Add(input));
+            _exception = Calculator.Invoking(_ => _.Add(input)).Should().Throw<ArgumentOutOfRangeException>();
         }
 
-        public void ThenExceptionMessageStartsWith(string message)
+        public void ThenExceptionMessage(string expectedWildcardPattern)
         {
-            Assert.True(_exception.Message.StartsWith(message));
-        }
-
-        public void AndExceptionMessageContains(string message)
-        {
-            Assert.True(_exception.Message.Contains(message));
+            _exception.WithMessage(expectedWildcardPattern);
         }
     }
 }

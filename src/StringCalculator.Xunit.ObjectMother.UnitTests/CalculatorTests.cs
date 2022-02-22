@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Shouldly;
+using FluentAssertions;
 using Xunit;
 
 namespace StringCalculator.Xunit.ObjectMother.UnitTests
@@ -13,9 +13,9 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             var sut = ObjectMother.Get<Calculator>();
 
             var numbers = string.Empty;
+            var expected = 0;
 
-            var actual = sut.Add(numbers);
-            Assert.Equal(0, actual);
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -26,8 +26,7 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
 
             var numbers = expected.ToString();
 
-            var actual = sut.Add(numbers);
-            Assert.Equal(expected, actual);
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -38,9 +37,9 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             var y = ObjectMother.Get<int>();
 
             var numbers = string.Join(",", x, y);
+            var expected = x + y;
 
-            var actual = sut.Add(numbers);
-            Assert.Equal(x + y, actual);
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -50,13 +49,11 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             var count = ObjectMother.Get<int>();
             var generator = ObjectMother.GetList<int>();
             
-            var intergers = generator.Take(count + 2).ToArray();
-            var numbers = string.Join(",", intergers);
+            var integers = generator.Take(count + 2).ToArray();
+            var numbers = string.Join(",", integers);
+            var expected = integers.Sum();
 
-            var actual = sut.Add(numbers);
-
-            var expected = intergers.Sum();
-            Assert.Equal(expected, actual);
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -67,9 +64,10 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             var y = ObjectMother.Get<int>();
             var z = ObjectMother.Get<int>();
 
-            var numbers = string.Format("{0}\n{1},{2}", x, y, z);
+            var numbers = $"{x}\n{y},{z}";
+            var expected = x + y + z;
 
-            sut.Add(numbers).ShouldBe(x + y + z);
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -83,19 +81,13 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             int dummy;
             var delimiter = charGenerator
                 .Where(c => int.TryParse(c.ToString(), out dummy) == false)
-                .Where(c => c != '-')
-                .First();
+                .First(c => c != '-');
 
             var integers = intGenerator.Take(count).ToArray();
-            var numbers = string.Format(
-                "//{0}\n{1}",
-                delimiter,
-                string.Join(delimiter.ToString(), integers));
-
-            var actual = sut.Add(numbers);
-
+            var numbers = $"//{delimiter}\n{string.Join(delimiter.ToString(), integers)}";
             var expected = integers.Sum();
-            Assert.Equal(expected, actual);
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -108,12 +100,9 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
 
             var numbers = string.Join(",", -x, y, -z);
 
-            var e = Assert.Throws<ArgumentOutOfRangeException>(
-                () => sut.Add(numbers));
-
-            Assert.True(e.Message.StartsWith("Negatives not allowed."));
-            Assert.True(e.Message.Contains((-x).ToString()));
-            Assert.True(e.Message.Contains((-z).ToString()));
+            sut.Invoking(_ => _.Add(numbers))
+                .Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"Negatives not allowed. Found {-x},{-z}. (Parameter 'numbers')");
         }
 
         [Fact]
@@ -126,10 +115,9 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             var x = Math.Min(smallSeed, 1000);
             var y = bigSeed + 1000;
             var numbers = string.Join(",", x, y);
+            var expected = x;
 
-            var actual = sut.Add(numbers);
-
-            Assert.Equal(x, actual);
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -141,15 +129,10 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             var intGenerator = ObjectMother.GetList<int>();
 
             var integers = intGenerator.Take(count).ToArray();
-            var numbers = string.Format(
-                "//[{0}]\n{1}",
-                delimiter,
-                string.Join(delimiter, integers));
-
-            var actual = sut.Add(numbers);
-
+            var numbers = $"//[{delimiter}]\n{string.Join(delimiter, integers)}";
             var expected = integers.Sum();
-            Assert.Equal(expected, actual);
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
         [Fact]
@@ -162,18 +145,10 @@ namespace StringCalculator.Xunit.ObjectMother.UnitTests
             var y = ObjectMother.Get<int>();
             var z = ObjectMother.Get<int>();
 
-            var numbers = string.Format(
-                "//[{0}][{1}]\n{2}{0}{3}{1}{4}",
-                delimiter1,
-                delimiter2,
-                x,
-                y,
-                z);
-
-            var actual = sut.Add(numbers);
-
+            var numbers = $"//[{delimiter1}][{delimiter2}]\n{x}{delimiter1}{y}{delimiter2}{z}";
             var expected = x + y + z;
-            Assert.Equal(expected, actual);
+
+            sut.Add(numbers).Should().Be(expected);
         }
     }
 }

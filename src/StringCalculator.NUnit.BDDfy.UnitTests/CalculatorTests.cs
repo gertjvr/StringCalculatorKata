@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using AutoFixture;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
 using TestStack.BDDfy;
-using TestStack.BDDfy.Scanners.StepScanners.Fluent;
 
 namespace StringCalculator.NUnit.BDDfy.UnitTests
 {
     [TestFixture]
     public class CalculatorTests : CalculatorOrchestration
     {
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddEmptyReturnsCorrectResults(Calculator sut)
-        {   
+        {
+            var numbers = string.Empty;
+            var expected = 0;
+            
             this.Given(t => t.GivenACalculator(sut))
-                .When(t => t.WhenTheResultIsCalculated(string.Empty))
-                .Then(t => t.ThenTheExpectedResultShouldBe(0))
+                .When(t => t.WhenTheResultIsCalculated(numbers))
+                .Then(t => t.ThenTheExpectedResultShouldBe(expected))
                 .BDDfy();
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddSingleNumberReturnsCorrectResult(
             Calculator sut,
             int expected)
@@ -33,7 +35,7 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
                 .BDDfy();
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddTwoNumbersReturnsCorrectResult(
             Calculator sut,
             int x,
@@ -48,56 +50,14 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
                 .BDDfy();
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddAnyAmountOfNumbersReturnsCorrectResult(
             Calculator sut,
             int count,
             Generator<int> generator)
         {
-            var intergers = Enumerable.Take<int>(generator, count + 2).ToArray();
-            var numbers = string.Join(",", intergers);
-            var expected = intergers.Sum();
-
-            this.Given(t => t.GivenACalculator(sut))
-                .When(t => t.WhenTheResultIsCalculated(numbers))
-                .Then(t => t.ThenTheExpectedResultShouldBe(expected))
-                .BDDfy();
-        }
-
-        [Test, CalculatorTestConventions]
-        public void AddWithLineBreakAndCommaAsDelimiterRetunrsCorrectResult(
-            Calculator sut,
-            int x,
-            int y,
-            int z)
-        {
-            var numbers = string.Format("{0}\n{1},{2}", x, y, z);
-            var expected = x + y + z;
-
-            this.Given(t => t.GivenACalculator(sut))
-                .When(t => t.WhenTheResultIsCalculated(numbers))
-                .Then(t => t.ThenTheExpectedResultShouldBe(expected))
-                .BDDfy();
-        }
-
-        [Test, CalculatorTestConventions]
-        public void AddLineWithCustomDelimiterReturnsCorrectResult(
-            Calculator sut,
-            Generator<char> charGenerator,
-            int count,
-            Generator<int> intGenerator)
-        {
-            int dummy;
-            var delimiter = Enumerable.Where<char>(charGenerator, c => int.TryParse(c.ToString(), out dummy) == false)
-                .Where(c => c != '-')
-                .First();
-
-            var integers = Enumerable.Take<int>(intGenerator, count).ToArray();
-            var numbers = string.Format(
-                "//{0}\n{1}",
-                delimiter,
-                string.Join(delimiter.ToString(), integers));
-
+            var integers = generator.Take(count + 2).ToArray();
+            var numbers = string.Join(",", integers);
             var expected = integers.Sum();
 
             this.Given(t => t.GivenACalculator(sut))
@@ -106,7 +66,45 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
                 .BDDfy();
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
+        public void AddWithLineBreakAndCommaAsDelimiterReturnsCorrectResult(
+            Calculator sut,
+            int x,
+            int y,
+            int z)
+        {
+            var numbers = $"{x}\n{y},{z}";
+            var expected = x + y + z;
+
+            this.Given(t => t.GivenACalculator(sut))
+                .When(t => t.WhenTheResultIsCalculated(numbers))
+                .Then(t => t.ThenTheExpectedResultShouldBe(expected))
+                .BDDfy();
+        }
+
+        [Test, UseAutoFixtureToCreateParameters]
+        public void AddLineWithCustomDelimiterReturnsCorrectResult(
+            Calculator sut,
+            Generator<char> charGenerator,
+            int count,
+            Generator<int> intGenerator)
+        {
+            int dummy;
+            var delimiter = charGenerator
+                .Where(c => int.TryParse(c.ToString(), out dummy) == false)
+                .First(c => c != '-');
+
+            var integers = intGenerator.Take(count).ToArray();
+            var numbers = $"//{delimiter}\n{string.Join(delimiter.ToString(), integers)}";
+            var expected = integers.Sum();
+
+            this.Given(t => t.GivenACalculator(sut))
+                .When(t => t.WhenTheResultIsCalculated(numbers))
+                .Then(t => t.ThenTheExpectedResultShouldBe(expected))
+                .BDDfy();
+        }
+
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddLineWithNegativeNumberThrowsCorrectException(
             Calculator sut,
             int x,
@@ -114,18 +112,14 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
             int z)
         {
             var numbers = string.Join(",", -x, y, -z);
-            var negativeX = (-x).ToString();
-            var negativeZ = (-z).ToString();
 
             this.Given(t => t.GivenACalculator(sut))
                 .When(t => t.WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(numbers))
-                .Then(t => t.ThenExceptionMessageStartsWith("Negatives not allowed."))
-                .And(t => t.AndExceptionMessageContains(negativeX))
-                .And(t => t.AndExceptionMessageContains(negativeZ))
+                .Then(t => t.ThenExceptionMessage($"Negatives not allowed. Found {-x},{-z}. (Parameter 'numbers')"))
                 .BDDfy();
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddIgnoresBigNumbers(
             Calculator sut,
             int smallSeed,
@@ -142,19 +136,15 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
                 .BDDfy();
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddLineWithCustomDelimiterStringReturnsCorrectResult(
             Calculator sut,
             string delimiter,
             int count,
             Generator<int> intGenerator)
         {
-            var integers = Enumerable.Take<int>(intGenerator, count).ToArray();
-            var numbers = string.Format(
-                "//[{0}]\n{1}",
-                delimiter,
-                string.Join(delimiter, integers));
-
+            var integers = intGenerator.Take(count).ToArray();
+            var numbers = $"//[{delimiter}]\n{string.Join(delimiter, integers)}";
             var expected = integers.Sum();
 
             this.Given(t => t.GivenACalculator(sut))
@@ -163,7 +153,7 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
                 .BDDfy();
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddLineWithMultipleCustomDelimiterStringsReturnsCorrectResult(
             Calculator sut,
             string delimiter1,
@@ -172,14 +162,7 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
             int y,
             int z)
         {
-            var numbers = string.Format(
-                "//[{0}][{1}]\n{2}{0}{3}{1}{4}",
-                delimiter1,
-                delimiter2,
-                x,
-                y,
-                z);
-
+            var numbers = $"//[{delimiter1}][{delimiter2}]\n{x}{delimiter1}{y}{delimiter2}{z}";
             var expected = x + y + z; 
             
             this.Given(t => t.GivenACalculator(sut))

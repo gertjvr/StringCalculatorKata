@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Linq;
+using AutoFixture;
+using FluentAssertions;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoNSubstitute;
 
 namespace StringCalculator.NUnit.SpecFor.UnitTests
 {
-    public abstract class CalculatorSpecFor : AutoSpecFor<Calculator>
+    public abstract class CalculatorSpecFor : SpecFor<Calculator>
     {
-        protected string Numbers { get; set; }
+        protected string Numbers { get; set; } = string.Empty;
 
         protected int Expected { get; set; }
 
         protected int Result { get; set; }
-
-        protected CalculatorSpecFor()
-            : base(new Fixture().Customize(new AutoNSubstituteCustomization()))
-        {
-        }
     }
 
     [TestFixture]
@@ -39,7 +34,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
@@ -62,7 +57,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
@@ -88,7 +83,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
@@ -99,10 +94,10 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         {
             var generator = Fixture.Create<Generator<int>>();
             var count = Fixture.Create<int>();
-            var intergers = generator.Take(count + 2).ToArray();
+            var integers = generator.Take(count + 2).ToArray();
 
-            Numbers = string.Join(",", intergers);
-            Expected = intergers.Sum();
+            Numbers = string.Join(",", integers);
+            Expected = integers.Sum();
 
             return Fixture.Create<Calculator>();
         }
@@ -115,7 +110,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
@@ -128,7 +123,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
             var y = Fixture.Create<int>();
             var z = Fixture.Create<int>();
 
-            Numbers = string.Format("{0}\n{1},{2}", x, y, z);
+            Numbers = $"{x}\n{y},{z}";
             Expected = x + y + z;
 
             return Fixture.Create<Calculator>();
@@ -142,7 +137,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
@@ -158,16 +153,11 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
             int dummy;
             var delimiter = charGenerator
                 .Where(c => int.TryParse(c.ToString(), out dummy) == false)
-                .Where(c => c != '-')
-                .First();
+                .First(c => c != '-');
 
             var integers = intGenerator.Take(count).ToArray();
 
-            Numbers = string.Format(
-                "//{0}\n{1}",
-                delimiter,
-                string.Join(delimiter.ToString(), integers));
-
+            Numbers = $"//{delimiter}\n{string.Join(delimiter.ToString(), integers)}";
             Expected = integers.Sum();
 
             return Fixture.Create<Calculator>();
@@ -181,24 +171,24 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
     [TestFixture]
     public class AddLineWithNegativeNumber : CalculatorSpecFor
     {
-        private int x;
-        private int y;
-        private int z;
+        private int _x;
+        private int _y;
+        private int _z;
 
         protected override Calculator Given()
         {
-            x = Fixture.Create<int>();
-            y = Fixture.Create<int>();
-            z = Fixture.Create<int>();
+            _x = Fixture.Create<int>();
+            _y = Fixture.Create<int>();
+            _z = Fixture.Create<int>();
 
-            Numbers = string.Join(",", -x, y, -z);
+            Numbers = string.Join(",", -_x, _y, -_z);
             
             return Fixture.Create<Calculator>();
         }
@@ -210,12 +200,9 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ThrowsCorrectException()
         {
-            var e = Assert.Throws<ArgumentOutOfRangeException>(
-                () => Subject.Add(Numbers));
-
-            Assert.IsTrue(e.Message.StartsWith("Negatives not allowed."));
-            Assert.IsTrue(e.Message.Contains((-x).ToString()));
-            Assert.IsTrue(e.Message.Contains((-z).ToString()));
+            Subject.Invoking(_ => _.Add(Numbers))
+                .Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"Negatives not allowed. Found {-_x},{-_z}. (Parameter 'numbers')");
         }
     }
 
@@ -224,8 +211,8 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
     {
         protected override Calculator Given()
         {
-            int smallSeed = Fixture.Create<int>();
-            int bigSeed = Fixture.Create<int>();
+            var smallSeed = Fixture.Create<int>();
+            var bigSeed = Fixture.Create<int>();
 
             var x = Math.Min(smallSeed, 1000);
             var y = bigSeed + 1000;
@@ -244,7 +231,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
@@ -259,11 +246,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
 
             var integers = intGenerator.Take(count).ToArray();
             
-            Numbers = string.Format(
-                "//[{0}]\n{1}",
-                delimiter,
-                string.Join(delimiter, integers));
-
+            Numbers = $"//[{delimiter}]\n{string.Join(delimiter, integers)}";
             Expected = integers.Sum();
 
             return Fixture.Create<Calculator>();
@@ -277,7 +260,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 
@@ -292,14 +275,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
             var y = Fixture.Create<int>();
             var z = Fixture.Create<int>();
 
-            Numbers = string.Format(
-                "//[{0}][{1}]\n{2}{0}{3}{1}{4}",
-                delimiter1,
-                delimiter2,
-                x,
-                y,
-                z);
-
+            Numbers = $"//[{delimiter1}][{delimiter2}]\n{x}{delimiter1}{y}{delimiter2}{z}";
             Expected = x + y + z;
 
             return Fixture.Create<Calculator>();
@@ -313,7 +289,7 @@ namespace StringCalculator.NUnit.SpecFor.UnitTests
         [Then]
         public void ReturnsCorrectResult()
         {
-            Assert.AreEqual(Expected, Result);
+            Result.Should().Be(Expected);
         }
     }
 }

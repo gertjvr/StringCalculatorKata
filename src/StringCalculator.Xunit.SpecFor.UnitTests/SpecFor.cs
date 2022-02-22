@@ -1,20 +1,45 @@
-﻿using Xunit;
+﻿using System;
+using AutoFixture;
+using Xunit;
 
 namespace StringCalculator.Xunit.SpecFor.UnitTests
 {
     public abstract class SpecFor<T>
     {
+        protected readonly IFixture Fixture;
+
         private bool _initialized;
 
-        protected T Subject;
+        protected T Subject { get; private set; }
 
+        protected SpecFor() : 
+            this(() => new Fixture().Customize(new DefaultCustomization()))
+        {
+        }
+
+        protected SpecFor(Func<IFixture> fixtureFactory)
+        {
+            if (fixtureFactory == null) 
+                throw new ArgumentNullException(nameof(fixtureFactory));
+            
+            Fixture = fixtureFactory();
+            
+            // ReSharper disable once VirtualMemberCallInConstructor
+            PreSetup();
+            SetUp();
+        }
+        
         protected abstract T Given();
 
         protected abstract void When();
-
-        public void Run()
+        
+        protected virtual void PreSetup()
         {
-            if (_initialized != false) 
+        }
+
+        private void SetUp()
+        {
+            if (_initialized) 
                 return;
 
             Subject = Given();
@@ -22,16 +47,8 @@ namespace StringCalculator.Xunit.SpecFor.UnitTests
 
             _initialized = true;
         }
-
-        protected void CheckExists(object value)
-        {
-            Assert.NotNull(value);
-        }
-
-        protected void CheckValue<TValue>(TValue expectedValue, TValue actualValue)
-        {
-            Assert.Equal(expectedValue, actualValue);
-        }
+        
+        
     }
 
     public class ThenAttribute : FactAttribute

@@ -1,4 +1,6 @@
 using System;
+using FluentAssertions;
+using FluentAssertions.Specialized;
 using NUnit.Framework;
 
 namespace StringCalculator.NUnit.BDDfy.UnitTests
@@ -9,36 +11,31 @@ namespace StringCalculator.NUnit.BDDfy.UnitTests
 
         private int _result;
 
-        private Exception _exception;
+        private ExceptionAssertions<ArgumentOutOfRangeException> _exception;
 
-        public void GivenACalculator(Calculator calculator)
+        protected void GivenACalculator(Calculator calculator)
         {
             Calculator = calculator;
         }
 
-        public void WhenTheResultIsCalculated(string input)
+        protected void WhenTheResultIsCalculated(string input)
         {
             _result = Calculator.Add(input);
         }
 
-        public void ThenTheExpectedResultShouldBe(int expectedResult)
+        protected void ThenTheExpectedResultShouldBe(int expectedResult)
         {
-            Assert.AreEqual(expectedResult, _result);
+            _result.Should().Be(expectedResult);
         }
 
-        public void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
+        protected void WhenTheResultIsCalculatedThrowsArgumentOutOfRangeException(string input)
         {
-            _exception = Assert.Throws<ArgumentOutOfRangeException>(() => Calculator.Add(input));
+            _exception = Calculator.Invoking(_ => _.Add(input)).Should().Throw<ArgumentOutOfRangeException>();
         }
 
-        public void ThenExceptionMessageStartsWith(string message)
+        public void ThenExceptionMessage(string expectedWildcardPattern)
         {
-            Assert.IsTrue(_exception.Message.StartsWith(message));
-        }
-
-        public void AndExceptionMessageContains(string message)
-        {
-            Assert.IsTrue(_exception.Message.Contains(message));
+            _exception.WithMessage(expectedWildcardPattern);
         }
     }
 }

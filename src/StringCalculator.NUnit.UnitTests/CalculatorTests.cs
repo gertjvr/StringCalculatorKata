@@ -1,71 +1,73 @@
 ﻿using System;
 using System.Linq;
+using AutoFixture;
+using FluentAssertions;
 using NUnit.Framework;
-using Ploeh.AutoFixture;
 
 namespace StringCalculator.NUnit.UnitTests
 {
     [TestFixture]
     public class CalculatorTests
     {
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddEmptyReturnsCorrectResults(
             Calculator sut)
         {
             var numbers = string.Empty;
-            var actual = sut.Add(numbers);
-            Assert.AreEqual(0, actual);
+            var expected = 0;
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddSingleNumberReturnsCorrectResult(
             Calculator sut,
             int expected)
         {
             var numbers = expected.ToString();
-            var actual = sut.Add(numbers);
-            Assert.AreEqual(expected, actual);
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddTwoNumbersReturnsCorrectResult(
             Calculator sut,
             int x,
             int y)
         {
             var numbers = string.Join(",", x, y);
-            var actual = sut.Add(numbers);
-            Assert.AreEqual(x + y, actual);
+            var expected = x + y;
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddAnyAmountOfNumbersReturnsCorrectResult(
             Calculator sut,
             int count,
             Generator<int> generator)
         {
-            var intergers = generator.Take(count + 2).ToArray();
-            var numbers = string.Join(",", intergers);
+            var integers = generator.Take(count + 2).ToArray();
+            var numbers = string.Join(",", integers);
+            var expected = integers.Sum();
 
-            var actual = sut.Add(numbers);
-
-            var expected = intergers.Sum();
-            Assert.AreEqual(expected, actual);
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
-        public void AddWithLineBreakAndCommaAsDelimiterRetunrsCorrectResult(
+        [Test, UseAutoFixtureToCreateParameters]
+        public void AddWithLineBreakAndCommaAsDelimiterReturnsCorrectResult(
             Calculator sut,
             int x,
             int y,
             int z)
         {
-            var numbers = string.Format("{0}\n{1},{2}", x, y, z);
-            var actual = sut.Add(numbers);
-            Assert.AreEqual(x + y + z, actual);
+            var numbers = $"{x}\n{y},{z}";
+            var expected = x + y + z;
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddLineWithCustomDelimiterReturnsCorrectResult(
             Calculator sut,
             Generator<char> charGenerator,
@@ -75,22 +77,16 @@ namespace StringCalculator.NUnit.UnitTests
             int dummy;
             var delimiter = charGenerator
                 .Where(c => int.TryParse(c.ToString(), out dummy) == false)
-                .Where(c => c != '-')
-                .First();
+                .First(c => c != '-');
 
             var integers = intGenerator.Take(count).ToArray();
-            var numbers = string.Format(
-                "//{0}\n{1}",
-                delimiter,
-                string.Join(delimiter.ToString(), integers));
-
-            var actual = sut.Add(numbers);
-
+            var numbers = $"//{delimiter}\n{string.Join(delimiter.ToString(), integers)}";
             var expected = integers.Sum();
-            Assert.AreEqual(expected, actual);
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddLineWithNegativeNumberThrowsCorrectException(
             Calculator sut,
             int x,
@@ -99,15 +95,12 @@ namespace StringCalculator.NUnit.UnitTests
         {
             var numbers = string.Join(",", -x, y, -z);
 
-            var e = Assert.Throws<ArgumentOutOfRangeException>(
-                () => sut.Add(numbers));
-
-            Assert.IsTrue(e.Message.StartsWith("Negatives not allowed."));
-            Assert.IsTrue(e.Message.Contains((-x).ToString()));
-            Assert.IsTrue(e.Message.Contains((-z).ToString()));
+            sut.Invoking(_ => _.Add(numbers))
+                .Should().Throw<ArgumentOutOfRangeException>()
+                .WithMessage($"Negatives not allowed. Found {-x},{-z}. (Parameter 'numbers')");
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddIgnoresBigNumbers(
             Calculator sut,
             int smallSeed,
@@ -116,13 +109,12 @@ namespace StringCalculator.NUnit.UnitTests
             var x = Math.Min(smallSeed, 1000);
             var y = bigSeed + 1000;
             var numbers = string.Join(",", x, y);
+            var expected = x;
 
-            var actual = sut.Add(numbers);
-
-            Assert.AreEqual(x, actual);
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddLineWithCustomDelimiterStringReturnsCorrectResult(
             Calculator sut,
             string delimiter,
@@ -130,18 +122,13 @@ namespace StringCalculator.NUnit.UnitTests
             Generator<int> intGenerator)
         {
             var integers = intGenerator.Take(count).ToArray();
-            var numbers = string.Format(
-                "//[{0}]\n{1}",
-                delimiter,
-                string.Join(delimiter, integers));
-
-            var actual = sut.Add(numbers);
-
+            var numbers = $"//[{delimiter}]\n{string.Join(delimiter, integers)}";
             var expected = integers.Sum();
-            Assert.AreEqual(expected, actual);
+
+            sut.Add(numbers).Should().Be(expected);
         }
 
-        [Test, CalculatorTestConventions]
+        [Test, UseAutoFixtureToCreateParameters]
         public void AddLineWithMultipleCustomDelimiterStringsReturnsCorrectResult(
             Calculator sut,
             string delimiter1,
@@ -150,18 +137,10 @@ namespace StringCalculator.NUnit.UnitTests
             int y,
             int z)
         {
-            var numbers = string.Format(
-                "//[{0}][{1}]\n{2}{0}{3}{1}{4}",
-                delimiter1,
-                delimiter2,
-                x,
-                y,
-                z);
-
-            var actual = sut.Add(numbers);
-
+            var numbers = $"//[{delimiter1}][{delimiter2}]\n{x}{delimiter1}{y}{delimiter2}{z}";
             var expected = x + y + z;
-            Assert.AreEqual(expected, actual);
+
+            sut.Add(numbers).Should().Be(expected); 
         }
     }
 }
