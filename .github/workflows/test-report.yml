@@ -12,6 +12,6 @@ jobs:
       with:
         artifact: test-results            # artifact name
         name: Tests                       # Name of the check run which will be created
-        path: 'src\StringCalculator.NUnit.BDDfy.UnitTests\TestResults\TestResults.xml,src\StringCalculator.NUnit.ObjectMother.UnitTests\TestResults\TestResults.xml,src\StringCalculator.NUnit.SpecFor.UnitTests\TestResults\TestResults.xml,src\StringCalculator.NUnit.UnitTests\TestResults\TestResults.xml,src\StringCalculator.Xunit.BDDfy.UnitTests\TestResults\TestResults.xml,src\StringCalculator.Xunit.ObjectMother.UnitTests\TestResults\TestResults.xml,src\StringCalculator.Xunit.SpecFor.UnitTests\TestResults\TestResults.xml,src\StringCalculator.XUnit.UnitTests\TestResults\TestResults.xml,src\StringCalculator.Xunit.XBehave.UnitTests\TestResults\TestResults.xml'                     # Path to test results (inside artifact .zip)
+        path: '**/TestResults.xml'        # Path to test results (inside artifact .zip)
         reporter: dotnet-trx              # Format of test results
 
